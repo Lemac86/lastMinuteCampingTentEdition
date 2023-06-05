@@ -90,7 +90,6 @@ def showCampingplätze():
     mycursor = mydb.cursor()
     mycursor.execute("SELECT * FROM dataTable")
     tabelle = mycursor.fetchall()
-    print(tabelle)
     if tabelle:
         for datensatz in tabelle:
             datenArr = []
@@ -180,45 +179,44 @@ def writeDatabaseToJSON():
     mycursor = mydb.cursor()
     mycursor.execute("SELECT * FROM dataTable")
     tabelle = mycursor.fetchall()
-    if tabelle:
-        data = []
-        for datensatz in tabelle:
-            dateaObj = {
-                "id": datensatz[0],
-                "name": datensatz[1],
-                "plz": datensatz[2],
-                "ort": datensatz[3],
-                "straße": datensatz[4],
-                "hausnummer": datensatz[5],
-                "telefonnummer": datensatz[6],
-                "oeffnungszeitenAnfang": datensatz[7],
-                "oeffnungszeitenEnde": datensatz[8],
-                "bewertung": datensatz[9],
-                "preis": datensatz[10],
-                "anzahlFreierPlaetze": datensatz[11],
-                "WC": datensatz[12],
-                "dusche": datensatz[13],
-                "spielplatz": datensatz[14],
-                "haustiere": datensatz[15],
-                "barrierefrei": datensatz[16],
-                "bademöglichkeit": datensatz[17],
-                "kiosk": datensatz[18],
-                "WLAN": datensatz[19],
-                "strom": datensatz[20],
-                "waschmaschine": datensatz[21],
-                "bildURL": datensatz[22],
-            }
+    print("huhu alex")
+    print(tabelle)
+    data = []
+    for datensatz in tabelle:
+        dateaObj = {
+            "id": datensatz[0],
+            "name": datensatz[1],
+            "plz": datensatz[2],
+            "ort": datensatz[3],
+            "straße": datensatz[4],
+            "hausnummer": datensatz[5],
+            "telefonnummer": datensatz[6],
+            "oeffnungszeitenAnfang": datensatz[7],
+            "oeffnungszeitenEnde": datensatz[8],
+            "bewertung": datensatz[9],
+            "preis": datensatz[10],
+            "anzahlFreierPlaetze": datensatz[11],
+            "WC": datensatz[12],
+            "dusche": datensatz[13],
+            "spielplatz": datensatz[14],
+            "haustiere": datensatz[15],
+            "barrierefrei": datensatz[16],
+            "bademöglichkeit": datensatz[17],
+            "kiosk": datensatz[18],
+            "WLAN": datensatz[19],
+            "strom": datensatz[20],
+            "waschmaschine": datensatz[21],
+            "bildURL": datensatz[22],
+        }
         data.append(dateaObj)
-        with open('data.json', 'w') as f:
-            json.dump(data, f)
+    with open('data.json', 'w') as f:
+        json.dump(data, f)
             
 
 
 createDatenbank()
 createTabelle()
-writeDatabaseToJSON()
 
-# hier datenbank auslesen und .json erstellen
 
 
 goOn = True

@@ -101,7 +101,7 @@
 
 <script setup lang="ts">
 import { computed, ref } from "vue";
-import data from "../data.json";
+import data from "../backend/data.json";
 
 const filters = ref({
   WC: false,
@@ -118,108 +118,7 @@ const filters = ref({
 const minBewertung = ref("");
 const maxPreis = ref("");
 const gesuchtesAttribut = ref("");
-let inputArray = [
-  {
-    name: "Neumünster Camping",
-    plz: "24536",
-    ort: "Neumünster",
-    straße: "Hauptstraße",
-    hausnummer: "18a",
-    telefonnummer: "0732764552374",
-    oeffnungszeitenAnfang: "07:00",
-    oeffnungszeitenEnde: "21:00",
-    bewertung: "3.3",
-    preis: "16.50",
-    anzahlFreierPlaetze: "37",
-    WC: "Ja",
-    dusche: "Ja",
-    spielplatz: "Ja",
-    haustiere: "Ja",
-    barrierefrei: "Ja",
-    bademöglichkeit: "Nein",
-    kiosk: "Ja",
-    WLAN: "Ja",
-    strom: "Ja",
-    waschmaschine: "Nein",
-    bildURL:
-      "https://mediafiles.urlaubsguru.de/wp-content/uploads/2015/04/three-friends-camping-on-mountain-at-sunset-istock_48107094_xlarge-2.jpg",
-  },
-  {
-    name: "Bordesholm Camping",
-    plz: "24532",
-    ort: "Bordesholm",
-    straße: "Dorfstraße",
-    hausnummer: "35",
-    telefonnummer: "034765387465",
-    oeffnungszeitenAnfang: "07:30",
-    oeffnungszeitenEnde: "21:30",
-    bewertung: "4.1",
-    preis: "18.00",
-    anzahlFreierPlaetze: "16",
-    WC: "Ja",
-    dusche: "Ja",
-    spielplatz: "Ja",
-    haustiere: "Ja",
-    barrierefrei: "Ja",
-    bademöglichkeit: "Ja",
-    kiosk: "Ja",
-    WLAN: "Nein",
-    strom: "Nein",
-    waschmaschine: "Ja",
-    bildURL:
-      "https://cdn.prod.v2.camping.info/media/content-service/fullwidthimage/tEnct8UtjC_7.png",
-  },
-  {
-    name: "Neumünster Camping",
-    plz: "24536",
-    ort: "Neumünster",
-    straße: "Hauptstraße",
-    hausnummer: "18a",
-    telefonnummer: "0732764552374",
-    oeffnungszeitenAnfang: "07:00",
-    oeffnungszeitenEnde: "21:00",
-    bewertung: "3.3",
-    preis: "16.50",
-    anzahlFreierPlaetze: "37",
-    WC: "Nein",
-    dusche: "Ja",
-    spielplatz: "Ja",
-    haustiere: "Ja",
-    barrierefrei: "Ja",
-    bademöglichkeit: "Nein",
-    kiosk: "Ja",
-    WLAN: "Ja",
-    strom: "Ja",
-    waschmaschine: "Nein",
-    bildURL:
-      "https://mediafiles.urlaubsguru.de/wp-content/uploads/2015/04/three-friends-camping-on-mountain-at-sunset-istock_48107094_xlarge-2.jpg",
-  },
-  {
-    name: "Bordesholm Camping",
-    plz: "24532",
-    ort: "Bordesholm",
-    straße: "Dorfstraße",
-    hausnummer: "35",
-    telefonnummer: "034765387465",
-    oeffnungszeitenAnfang: "07:30",
-    oeffnungszeitenEnde: "21:30",
-    bewertung: "4.1",
-    preis: "18.00",
-    anzahlFreierPlaetze: "16",
-    WC: "Ja",
-    dusche: "Ja",
-    spielplatz: "Ja",
-    haustiere: "Ja",
-    barrierefrei: "Ja",
-    bademöglichkeit: "Ja",
-    kiosk: "Ja",
-    WLAN: "Nein",
-    strom: "Nein",
-    waschmaschine: "Ja",
-    bildURL:
-      "https://cdn.prod.v2.camping.info/media/content-service/fullwidthimage/tEnct8UtjC_7.png",
-  },
-];
+let inputArray = data;
 
 const displayedArray = computed(() =>
   inputArray.filter(
