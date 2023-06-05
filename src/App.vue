@@ -21,21 +21,16 @@
       <div class="extras">
         <div
           class="extrasButtonAlignment"
-          v-for="extra in [
-            'WC',
-            'Dusche',
-            'Spielplatz',
-            'Haustiere',
-            'Behindertengerecht',
-            'Bademöglichkeit',
-            'Kiosk',
-            'WLAN',
-            'Strom',
-            'Waschmaschine',
-          ]"
+          v-for="extra in Object.keys(filters)"
         >
-          <input type="checkbox" :name="extra" :id="extra" value="" />
-          <label :for="extra" class="checkboxes ps-2"> {{ extra }}</label>
+          <input
+            type="checkbox"
+            :id="extra"
+            v-model="filters[extra as  keyof typeof filters]"
+          />
+          <label :for="extra" class="checkboxes ps-2">
+            {{ extra.charAt(0).toUpperCase() + extra.slice(1) }}</label
+          >
         </div>
         <label id="priceLabel">Preis bis </label><br /><input
           type="search"
@@ -107,6 +102,18 @@
 <script setup lang="ts">
 import { computed, ref } from "vue";
 
+const filters = ref({
+  WC: false,
+  dusche: false,
+  spielplatz: false,
+  haustiere: false,
+  barrierefrei: false,
+  bademöglichkeit: false,
+  kiosk: false,
+  WLAN: false,
+  strom: false,
+  waschmaschine: false,
+});
 const minBewertung = ref("");
 const maxPreis = ref("");
 const gesuchtesAttribut = ref("");
@@ -127,7 +134,7 @@ let inputArray = [
     dusche: "Ja",
     spielplatz: "Ja",
     haustiere: "Ja",
-    behindertengerecht: "Ja",
+    barrierefrei: "Ja",
     bademöglichkeit: "Nein",
     kiosk: "Ja",
     WLAN: "Ja",
@@ -152,7 +159,7 @@ let inputArray = [
     dusche: "Ja",
     spielplatz: "Ja",
     haustiere: "Ja",
-    behindertengerecht: "Ja",
+    barrierefrei: "Ja",
     bademöglichkeit: "Ja",
     kiosk: "Ja",
     WLAN: "Nein",
@@ -173,11 +180,11 @@ let inputArray = [
     bewertung: "3.3",
     preis: "16.50",
     anzahlFreierPlaetze: "37",
-    WC: "Ja",
+    WC: "Nein",
     dusche: "Ja",
     spielplatz: "Ja",
     haustiere: "Ja",
-    behindertengerecht: "Ja",
+    barrierefrei: "Ja",
     bademöglichkeit: "Nein",
     kiosk: "Ja",
     WLAN: "Ja",
@@ -202,7 +209,7 @@ let inputArray = [
     dusche: "Ja",
     spielplatz: "Ja",
     haustiere: "Ja",
-    behindertengerecht: "Ja",
+    barrierefrei: "Ja",
     bademöglichkeit: "Ja",
     kiosk: "Ja",
     WLAN: "Nein",
@@ -216,6 +223,24 @@ let inputArray = [
 const displayedArray = computed(() =>
   inputArray.filter(
     (e) =>
+      ((filters.value.WC && e.WC == "Ja") || filters.value.WC == false) &&
+      ((filters.value.dusche && e.dusche == "Ja") ||
+        filters.value.dusche == false) &&
+      ((filters.value.spielplatz && e.spielplatz == "Ja") ||
+        filters.value.spielplatz == false) &&
+      ((filters.value.haustiere && e.haustiere == "Ja") ||
+        filters.value.haustiere == false) &&
+      ((filters.value.barrierefrei && e.barrierefrei == "Ja") ||
+        filters.value.barrierefrei == false) &&
+      ((filters.value.bademöglichkeit && e.bademöglichkeit == "Ja") ||
+        filters.value.bademöglichkeit == false) &&
+      ((filters.value.kiosk && e.kiosk == "Ja") ||
+        filters.value.kiosk == false) &&
+      ((filters.value.WLAN && e.WLAN == "Ja") || filters.value.WLAN == false) &&
+      ((filters.value.strom && e.strom == "Ja") ||
+        filters.value.strom == false) &&
+      ((filters.value.waschmaschine && e.waschmaschine == "Ja") ||
+        filters.value.waschmaschine == false) &&
       (!minBewertung.value ||
         parseFloat(e.bewertung) > parseFloat(minBewertung.value)) &&
       (!maxPreis.value || parseFloat(e.preis) < parseFloat(maxPreis.value)) &&
