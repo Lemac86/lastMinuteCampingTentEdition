@@ -80,7 +80,7 @@ def addCampingplatz(
     mycursor.execute(sql, val)
     mydb.commit()
     print(f"\n\033[1m{name} wurde der Datenbank hinzugefügt!\033[0m")
-    # hier datenbank auslesen und .json neu erstellen
+    writeDatabaseToJSON()
 
 
 def showCampingplätze():
@@ -94,7 +94,7 @@ def showCampingplätze():
     if tabelle:
         for datensatz in tabelle:
             datenArr = []
-            for attribut in datensatz:
+            for attribut in datensatz:   
                 datenArr.append(attribut)
             print(
                 f"\033[1mName: {datenArr[1]}, Postleitzahl: {datenArr[2]}, Ort: {datenArr[3]}, Straße: {datenArr[4]}, Hausnummer: {datenArr[5]}, Telefonnummer: {datenArr[6]}\033[0m"
@@ -146,7 +146,7 @@ def changeFreiePlätze(name, campingplatzPlätze):
         print(
             f"\033[1mDie Anzahl freier Plätze für {name} wurde auf {campingplatzPlätze} aktualisiert.\033[0m"
         )
-        # hier datenbank auslesen und .json neu erstellen
+        writeDatabaseToJSON()
     else:
         print(f"\n\033[1m{name} konnte in der Datenbank nicht gefunden werden!\033[0m")
     
@@ -168,7 +168,7 @@ def deleteCampingplatz(name):
         mycursor.execute(sql, val)
         mydb.commit()
         print(f"\n\033[1m{name} wurde aus der Datenbank entfernt!\033[0m")
-        # hier datenbank auslesen und .json neu erstellen
+        writeDatabaseToJSON()
     else:
         print(f"\n\033[1m{name} konnte in der Datenbank nicht gefunden werden!\033[0m")
     
@@ -180,21 +180,43 @@ def writeDatabaseToJSON():
     mycursor = mydb.cursor()
     mycursor.execute("SELECT * FROM dataTable")
     tabelle = mycursor.fetchall()
-    json.dumps(tabelle, f)
+    if tabelle:
+        data = []
+        for datensatz in tabelle:
+            dateaObj = {
+                "id": datensatz[0],
+                "name": datensatz[1],
+                "plz": datensatz[2],
+                "ort": datensatz[3],
+                "straße": datensatz[4],
+                "hausnummer": datensatz[5],
+                "telefonnummer": datensatz[6],
+                "oeffnungszeitenAnfang": datensatz[7],
+                "oeffnungszeitenEnde": datensatz[8],
+                "bewertung": datensatz[9],
+                "preis": datensatz[10],
+                "anzahlFreierPlaetze": datensatz[11],
+                "WC": datensatz[12],
+                "dusche": datensatz[13],
+                "spielplatz": datensatz[14],
+                "haustiere": datensatz[15],
+                "barrierefrei": datensatz[16],
+                "bademöglichkeit": datensatz[17],
+                "kiosk": datensatz[18],
+                "WLAN": datensatz[19],
+                "strom": datensatz[20],
+                "waschmaschine": datensatz[21],
+                "bildURL": datensatz[22],
+            }
+        data.append(dateaObj)
+        with open('data.json', 'w') as f:
+            json.dump(data, f)
+            
 
 
 createDatenbank()
 createTabelle()
-import json
-
-data = [{
-    "name": "John",
-    "age": 30,
-    "city": "New York"
-}]
-
-with open('data.json', 'w') as f:
-    json.dump(data, f)
+writeDatabaseToJSON()
 
 # hier datenbank auslesen und .json erstellen
 
