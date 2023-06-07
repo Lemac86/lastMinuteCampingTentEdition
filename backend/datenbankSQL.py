@@ -179,8 +179,6 @@ def writeDatabaseToJSON():
     mycursor = mydb.cursor()
     mycursor.execute("SELECT * FROM dataTable")
     tabelle = mycursor.fetchall()
-    print("huhu alex")
-    print(tabelle)
     data = []
     for datensatz in tabelle:
         dateaObj = {

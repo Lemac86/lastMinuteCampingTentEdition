@@ -101,7 +101,7 @@
 
 <script setup lang="ts">
 import { computed, ref } from "vue";
-import data from "../backend/data.json";
+import data from "../data.json";
 
 const filters = ref({
   WC: false,
