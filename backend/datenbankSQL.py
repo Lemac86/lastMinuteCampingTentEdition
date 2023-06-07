@@ -1,7 +1,7 @@
 import mysql.connector
 import json
 
-
+#Erstellt die Datenbank "lastMinuteCampingTentEdition" sofern sie noch nicht existiert
 def createDatenbank():
     mydb = mysql.connector.connect(
         host="localhost",
@@ -11,7 +11,7 @@ def createDatenbank():
     mycursor = mydb.cursor()
     mycursor.execute("CREATE DATABASE IF NOT EXISTS lastMinuteCampingTentEdition")
 
-
+#Erstellt die Tabelle "dataTable" sofern sie noch nicht existiert mit - in .execute - definierten Datentypen und -größen
 def createTabelle():
     mydb = mysql.connector.connect(
         host="localhost", user="root", database="lastMinuteCampingTentEdition"
@@ -22,7 +22,7 @@ def createTabelle():
         "CREATE TABLE IF NOT EXISTS dataTable (id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(50), postleitzahl VARCHAR(5), ort VARCHAR(30), straße VARCHAR(30), hausnummer VARCHAR(15), telefonnummer VARCHAR(30), öffnungszeitenAnfang VARCHAR(5), öffnungszeitenEnde VARCHAR(5), bewertung VARCHAR(3), preis VARCHAR(6), anzahlFreierPlätze VARCHAR(5), WC VARCHAR(4), dusche VARCHAR(4), spielplatz VARCHAR(4), tiereErlaubt VARCHAR(4), barrierefrei VARCHAR(4), bademöglichkeit VARCHAR(4), kiosk VARCHAR(4), WLAN VARCHAR(4), strom VARCHAR(4), waschmaschine VARCHAR(4), bildLink VARCHAR(255))"
     )
 
-
+#Fügt der Tabelle einen Datensatz hinzu und führt dann die writeToJSON Funktion aus (siehe unten)
 def addCampingplatz(
     name,
     postleitzahl,
@@ -82,7 +82,7 @@ def addCampingplatz(
     print(f"\n\033[1m{name} wurde der Datenbank hinzugefügt!\033[0m")
     writeDatabaseToJSON()
 
-
+#Zeigt alle Datensätze in Form definierter Attribute an, sofern vorhanden
 def showCampingplätze():
     mydb = mysql.connector.connect(
         host="localhost", user="root", database="lastMinuteCampingTentEdition"
@@ -101,7 +101,7 @@ def showCampingplätze():
     else:
         print("\n\033[1mEs konnten keine Einträge gefunden werden!\033[0m")
 
-
+#Sucht einen bestimmten Campingplatz anhand des Namens und gibt diesen, sofern er gefunden wird, mit definierten Attributen aus
 def searchCampingplatz(name):
     mydb = mysql.connector.connect(
         host="localhost", user="root", database="lastMinuteCampingTentEdition"
@@ -123,7 +123,8 @@ def searchCampingplatz(name):
     else:
         print(f"\n\033[1m{name} konnte in der Datenbank nicht gefunden werden!\033[0m")
 
-
+#Durchsucht anhand des Namens die Datenbank nach entsprechendem Datensatz und ändert in diesem, sofern es einen Treffer gibt, die Anzahl freier Campingplätze 
+# und führt anschließend die writeToJSON Funktion aus
 def changeFreiePlätze(name, campingplatzPlätze):
     mydb = mysql.connector.connect(
         host="localhost", user="root", database="lastMinuteCampingTentEdition"
@@ -150,7 +151,7 @@ def changeFreiePlätze(name, campingplatzPlätze):
         print(f"\n\033[1m{name} konnte in der Datenbank nicht gefunden werden!\033[0m")
     
 
-
+#Durchsucht die Datenbank anhand des Namens. Bei einem Treffer wird der entsprechende Datensatz gelöscht und anschließend die writeToJSON Funktion ausgeführt
 def deleteCampingplatz(name):
     mydb = mysql.connector.connect(
         host="localhost", user="root", database="lastMinuteCampingTentEdition"
@@ -171,7 +172,9 @@ def deleteCampingplatz(name):
     else:
         print(f"\n\033[1m{name} konnte in der Datenbank nicht gefunden werden!\033[0m")
     
-
+#Die komplette Zabelle wird aus der Datenbank ausgelesen, in eine liste von Objekten überführt und anschließend in einer .JSON Datei gespeichert, 
+# welche von unserem Front-End als Datenquelle verwendet wird. Da nach jeder Veränderung der Daten in der Datenbank auch die .JSON Datei neu erstellt wird, 
+# kann man diese als Zwischenspeicher ansehen wobei die datenbank weiterhin als "Source-of-truth" fungiert.
 def writeDatabaseToJSON():
     mydb = mysql.connector.connect(
         host="localhost", user="root", database="lastMinuteCampingTentEdition"
@@ -218,6 +221,7 @@ createTabelle()
 
 
 goOn = True
+
 while goOn:
     print("\n\033[1mWas kann ich für dich tun?\033[0m")
     print("\033[1m1\033[0m - Um alle Campingplätze anzuzeigen.")
