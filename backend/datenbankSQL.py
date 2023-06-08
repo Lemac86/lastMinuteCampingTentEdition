@@ -50,44 +50,46 @@ def addCampingplatz(
     mydb = mysql.connector.connect(
         host="localhost", user="root", database="lastMinuteCampingTentEdition"
     )
-
     mycursor = mydb.cursor()
+
     sql = "SELECT * FROM dataTable WHERE name = %s"
     val = (name,)
     mycursor.execute(sql, val)
     tabelle = mycursor.fetchall()
-    if not tabelle:
-        sql = "INSERT INTO dataTable (name, postleitzahl, ort, straße, hausnummer, telefonnummer, öffnungszeitenAnfang, öffnungszeitenEnde, bewertung, preis, anzahlFreierPlätze, WC, dusche, spielplatz, tiereErlaubt, barrierefrei, bademöglichkeit, kiosk, WLAN, strom, waschmaschine, bildLink) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
-        val = (
-            name,
-            postleitzahl,
-            ort,
-            straße,
-            hausnummer,
-            telefonnummer,
-            öffnungszeitenAnfang,
-            öffnungszeitenEnde,
-            bewertung,
-            preis,
-            anzahlFreierPlätze,
-            WC,
-            dusche,
-            spielplatz,
-            tiereErlaubt,
-            barrierefrei,
-            bademöglichkeit,
-            kiosk,
-            WLAN,
-            strom,
-            waschmaschine,
-            bildLink,
-        )
-        mycursor.execute(sql, val)
-        mydb.commit()
-        print(f"\n\033[1m{name} wurde der Datenbank hinzugefügt!\033[0m")
-        writeDatabaseToJSON()
-    else:
+    if tabelle:
         print(f"\n\033[1m{name} ist bereits vorhanden!\033[0m")
+        return 
+    
+    sql = "INSERT INTO dataTable (name, postleitzahl, ort, straße, hausnummer, telefonnummer, öffnungszeitenAnfang, öffnungszeitenEnde, bewertung, preis, anzahlFreierPlätze, WC, dusche, spielplatz, tiereErlaubt, barrierefrei, bademöglichkeit, kiosk, WLAN, strom, waschmaschine, bildLink) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+    val = (
+        name,
+        postleitzahl,
+        ort,
+        straße,
+        hausnummer,
+        telefonnummer,
+        öffnungszeitenAnfang,
+        öffnungszeitenEnde,
+        bewertung,
+        preis,
+        anzahlFreierPlätze,
+        WC,
+        dusche,
+        spielplatz,
+        tiereErlaubt,
+        barrierefrei,
+        bademöglichkeit,
+        kiosk,
+        WLAN,
+        strom,
+        waschmaschine,
+        bildLink,
+    )
+    mycursor.execute(sql, val)
+    mydb.commit()
+    print(f"\n\033[1m{name} wurde der Datenbank hinzugefügt!\033[0m")
+    writeDatabaseToJSON()
+        
 
 #Zeigt alle Datensätze in Form definierter Attribute an, sofern vorhanden
 def showCampingplätze():
