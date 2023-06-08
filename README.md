@@ -24,8 +24,24 @@ Mit dem Entschluss war die grobe Planung abgeschlossen und die Umsetzung konnte 
 
 ### Umsetzung
 
-Wie in der Planung bereits erwähnt, war unser Ausgangspunkt eine im Voraus erstellte „Personendatenbank“ in welcher wir eine mySQL-Datenbank mit Python erstellten und verwalten. Diese Verknüpfung wurde durch die Python-Bibliothek „mysql-connector“ realisiert. Um die Administration der Datenbank in Python zu ermöglichen wurden folgende Funktionalitäten implementiert:
+Wie in der Planung bereits erwähnt, war unser Ausgangspunkt eine im Voraus erstellte „Personendatenbank“ in welcher wir eine mySQL-Datenbank mit Python erstellen und verwalten. Diese Verknüpfung wurde durch die Python-Bibliothek „mysql-connector“ realisiert. Um die Administration der Datenbank in Python zu ermöglichen wurden folgende Funktionalitäten implementiert:
 
-- Datensatz hinzufügen
-- Datensatz in der Datenbank suchen
-- Vorhandene Datensätze anzeigen
+- Eine Datenbank namens "lastMinuteCampingTentEdition" wird erstellt, sofern sie noch nicht existiert
+- Eine Tabelle namens "dataTable" wird erstellt, sofern sie in der Datenbank noch nicht existiert
+- Ein Datensatz kann hinzugefügt werden, sofern der gewählte Name in der Datenbank noch nicht existiert
+- Ein Campingplatz kann anhand des Namens in der Datenbank gesucht werden (zur Steigerung der Übersichtlichkeit werden die Attribute bei der Ausgabe sinnvoll beschränkt)
+- Alle vorhandenen Datensätze können ausgegeben werden (zur Steigerung der Übersichtlichkeit werden hierbei die Attribute sinnvoll beschränkt)
+- Die Anzahl freier Campingplätze bereits in der Datenbank existierender Datensätze kann geändert werden
+- Datensätze können gelöscht werden
+- Zur Veranschaulichung können Testdaten in die Datenbank eingetragen werden
+
+Um die Interaktion angenehmer zu gestalten läuft das Programm in einer "while-Schleife" die erst durch eine manuelle Eingabe beendet werden kann.  
+Innerhalb dieser Schleife befindet man sich in einem Optionsmenü.  
+Durch Eingabe einer Zahl wird eine bestimmte Option ausgeführt, nachdem anschließend (falls nötig) weitere Parameter hierzu abgefragt werden.  
+Welche Option sich hinter welcher Zahl verbirgt wird nach jedem Durchlauf, aufgelistet, angezeigt.  
+Da es sich bei den Optionen um sich wiederholende Abläufe handelt, wurden sie in Form von Funktionen in das Programm implementiert.  
+Mögliche, folgende Parameter hingegen sind variabel und werden der Funktion daher bei der Ausführung bereitgestellt und berücksichtigt.
+
+<p align="center"><img src="./docs/EingabeOptionen.png" alt="vollständige Handlung" width="30%"></p>
+
+Der Datenbank-Server wird durch einen mySql-Server über das kostenlose Programm "XAMPP" realisiert.
