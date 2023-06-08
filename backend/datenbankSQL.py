@@ -52,35 +52,42 @@ def addCampingplatz(
     )
 
     mycursor = mydb.cursor()
-    sql = "INSERT INTO dataTable (name, postleitzahl, ort, straße, hausnummer, telefonnummer, öffnungszeitenAnfang, öffnungszeitenEnde, bewertung, preis, anzahlFreierPlätze, WC, dusche, spielplatz, tiereErlaubt, barrierefrei, bademöglichkeit, kiosk, WLAN, strom, waschmaschine, bildLink) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
-    val = (
-        name,
-        postleitzahl,
-        ort,
-        straße,
-        hausnummer,
-        telefonnummer,
-        öffnungszeitenAnfang,
-        öffnungszeitenEnde,
-        bewertung,
-        preis,
-        anzahlFreierPlätze,
-        WC,
-        dusche,
-        spielplatz,
-        tiereErlaubt,
-        barrierefrei,
-        bademöglichkeit,
-        kiosk,
-        WLAN,
-        strom,
-        waschmaschine,
-        bildLink,
-    )
+    sql = "SELECT * FROM dataTable WHERE name = %s"
+    val = (name,)
     mycursor.execute(sql, val)
-    mydb.commit()
-    print(f"\n\033[1m{name} wurde der Datenbank hinzugefügt!\033[0m")
-    writeDatabaseToJSON()
+    tabelle = mycursor.fetchall()
+    if not tabelle:
+        sql = "INSERT INTO dataTable (name, postleitzahl, ort, straße, hausnummer, telefonnummer, öffnungszeitenAnfang, öffnungszeitenEnde, bewertung, preis, anzahlFreierPlätze, WC, dusche, spielplatz, tiereErlaubt, barrierefrei, bademöglichkeit, kiosk, WLAN, strom, waschmaschine, bildLink) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+        val = (
+            name,
+            postleitzahl,
+            ort,
+            straße,
+            hausnummer,
+            telefonnummer,
+            öffnungszeitenAnfang,
+            öffnungszeitenEnde,
+            bewertung,
+            preis,
+            anzahlFreierPlätze,
+            WC,
+            dusche,
+            spielplatz,
+            tiereErlaubt,
+            barrierefrei,
+            bademöglichkeit,
+            kiosk,
+            WLAN,
+            strom,
+            waschmaschine,
+            bildLink,
+        )
+        mycursor.execute(sql, val)
+        mydb.commit()
+        print(f"\n\033[1m{name} wurde der Datenbank hinzugefügt!\033[0m")
+        writeDatabaseToJSON()
+    else:
+        print(f"\n\033[1m{name} ist bereits vorhanden!\033[0m")
 
 #Zeigt alle Datensätze in Form definierter Attribute an, sofern vorhanden
 def showCampingplätze():
@@ -171,6 +178,27 @@ def deleteCampingplatz(name):
         writeDatabaseToJSON()
     else:
         print(f"\n\033[1m{name} konnte in der Datenbank nicht gefunden werden!\033[0m")
+
+#Fügt der Datenbank zur Veranschaulichung Testdaten hinzu.
+def seeder():
+    addCampingplatz(
+        "Nature camping","18403","Nature","Naturestreet","5","0436543","00:00","24:00","4.3","22.00","11","Ja","Ja","Nein","Ja","Ja","Ja","Ja","Nein","Ja","Ja","https://www.usnews.com/object/image/00000172-0a48-dd19-af73-dfc9adc60000/1-intro.jpg?update-time=1589312815886&size=responsive640"
+    )
+    addCampingplatz(
+        "Forest camping","24500","Neuwald","Neuer waldweg","13","04046387387436543","08:00","21:00","4.5","20.00","7","Ja","Ja","Ja","Ja","Ja","Nein","Ja","Ja","Ja","Nein","https://eurekacamping.johnsonoutdoors.com/sites/default/files/tent-camping-at-sunset.jpg"
+    )
+    addCampingplatz(
+        "Nok camping","24768","Rendsburg","Kanalstra\u00dfe","66a","04356374356","06:00","22:00","3.9","12.80","35","Ja","Ja","Ja","Ja","Nein","Ja","Nein","Nein","Ja","Ja","https://mediafiles.urlaubsguru.de/wp-content/uploads/2015/04/three-friends-camping-on-mountain-at-sunset-istock_48107094_xlarge-2.jpg"
+    )
+    addCampingplatz(
+        "Neum\u00fcnster camping","24536","Neum\u00fcnster","Hauptstra\u00dfe","18a","0785486732","07:00","21:00","3.3","16.50","52","Ja","Ja","Nein","Nein","Ja","Nein","Ja","Ja","Ja","Ja","https://www.fnp.de/bilder/2020/09/04/90037396/23894747-teilweise-kann-wildcampen-in-deutschland-richtig-teuer-werden-3sfe.jpg"
+    )
+    addCampingplatz(
+        "Bordesholm camping","25235","Bordesholm","Dorfstra\u00dfe","12","075837443543","08:00","20:00","4.6","13.50","24","Ja","Ja","Ja","Ja","Ja","Ja","Nein","Nein","Nein","Nein","https://blog-6aa0.kxcdn.com/wp-content/uploads/2021/02/camping-reiseziele-in-deutschland-titel-bild.jpg"
+    )
+    addCampingplatz(
+        "Kieler campingparadies","28764","Kiel","Achterbahn","65","04376587353","10:00","19:00","2.3","75.60","45","Ja","Ja","Nein","Nein","Nein","Nein","Ja","Nein","Nein","Nein","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCTvreuZjNlKBC3gZGOCjPMnrjfpZxzeYHDhmhGTIVwa3IzRXoUaeUMRAPlyGRQb30Jw4&usqp=CAU"
+    )
     
 #Die komplette Zabelle wird aus der Datenbank ausgelesen, in eine liste von Objekten überführt und anschließend in einer .JSON Datei gespeichert, 
 # welche von unserem Front-End als Datenquelle verwendet wird. Da nach jeder Veränderung der Daten in der Datenbank auch die .JSON Datei neu erstellt wird, 
@@ -229,14 +257,17 @@ while goOn:
     print("\033[1m3\033[0m - Um einen Campingplatz hinzuzufügen.")
     print("\033[1m4\033[0m - Um die Anzahl freier Plätze zu bearbeiten.")
     print("\033[1m5\033[0m - Um einen Campingplatz zu löschen.")
-    print("\033[1m6\033[0m - Um das Programm zu beenden.")
+    print("\033[1m6\033[0m - Um Testdaten in die Datenbank einzufügen.")
+    print("\033[1m7\033[0m - Um das Programm zu beenden.")
     nextTask = input(
         "\n\033[1mWelche Option möchtest du durchführen? \nOption: \033[0m"
     )
 
-    if nextTask == "6":
+    if nextTask == "7":
         print("\n\033[1mBis zum nächsten Mal!\033[0m")
         goOn = False
+    elif nextTask == "6":
+        seeder()
     elif nextTask == "5":
         entryToBeDeleted = input(
             "\n\033[1mWelcher Campingplatz soll aus der Datenbank entfernt werden? \nName: \033[0m"
