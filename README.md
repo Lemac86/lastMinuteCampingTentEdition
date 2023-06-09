@@ -10,12 +10,13 @@ Ziel war eine Datenbank mit der Programmiersprache „Python“ zu erstellen sow
 
 ### Planung und Entscheidungsfindung
 
-Im ersten Schritt der Planung befassten wir uns mit der Frage, was wir darstellen wollen.\
+Im ersten Schritt der Planung befassten wir uns mit der Frage, was wir darstellen wollen.
 
 Da im ersten Halbjahr bereits ein Datenbank-Projekt vorausgegangen war in welchem wir eine mySQL-Datenbank zum Thema „Last-Minute-Camping“ erstellten, war schnell klar, dass wir hier auch wieder ansetzen könnten.  
 Die Entscheidung war also gefallen.  
 Da wir in den Wochen zuvor bereits daran gearbeitet hatten eine Datenbank in Python zu erstellen war auch der Ausgangspunkt für das Projekt schnell gefunden.  
-Um das Projekt überschaubarer und anschaulicher zu halten, als auch aufgrund des knappen Zeitrahmens, entschieden wir uns, keine Kopie der Datenbank aus dem ersten Halbjahr zu erstellen, sondern eine neue, kompaktere Version dieser zu entwickeln. Die „Tent Editon“ war geboren, welche sich ausschließlich auf Camper mit Zelt fokussieren sollte.  
+Um das Projekt überschaubarer und anschaulicher zu halten, als auch aufgrund des knappen Zeitrahmens, entschieden wir uns, keine Kopie der Datenbank aus dem ersten Halbjahr zu erstellen, sondern eine neue, kompaktere Version dieser zu entwickeln. Die „Tent Editon“ war geboren, welche sich ausschließlich auf Camper mit Zelt fokussieren sollte.
+
 Als Nächstes beschäftigten wir uns mit der sinnvollen Verwendung unserer Datenbank und der enthaltenen Daten. In unserem Projekt im ersten Halbjahr wurden viele Informationen in eine Datenbank eingepflegt und konnten auch jederzeit vom betreffenden Administrator verändert werden, aber von außen einsehen, geschweige denn als möglicher Interessent hiermit zu interagieren war leider nicht möglich. Aber wie wollten wir unsere Daten weiterverarbeiten? Da es sich um eine Übersicht zu Campingplätzen sowie deren freie Kapazitäten handelt war der logische Entschluss unsere Daten für interessierte Camper und Camperinnen zur Verfügung zu stellen. Als eine der geläufigsten Varianten wählten wir eine browserbasierte Webansicht, welche dem zukünftigen Kunden eine intuitive und übersichtliche Darstellung unserer Daten vermitteln würde. Die Umsetzung sollte in „Vue.js“ erfolgen. Dabei handelt es sich um ein sogenanntes JavaScript-Framework, welches die Verknüpfung von HTML-, CSS- und JavaScript-Elementen stark vereinfacht und so auch den Entwicklungsprozess beschleunigt. Der große Vorteil der von uns gewählten Darstellungsform ist zudem, dass unsere Daten in jedem gängigen Internetbrowser visualisiert werden können.
 Abschließend stellte sich die Frage, wie wir ein clientseitiges Frontend, welches durch den Webbrowser dargestellt wird mit unserer Datenbank verbinden könnten. Im Normalfall regelt ein Backend den Austausch der Daten zwischen Frontend und der Datenbank. Dies geschieht z.B., um für Sicherheit zu sorgen, da der Quellcode hierdurch nicht einsehbar und manipulierbar wäre oder aber auch um Datenintegrität zu gewährleisten wobei das Backend jeden Datenaustausch validieren würde und dadurch verhindert, dass es bei zeitgleichen Zugriffen verschiedener Benutzer zu Dateninkonsistenzen kommen kann.
 Da die zeitlichen Fristen für das Projekt schon sehr knapp erschienen, verwarfen wir aber schnell den Plan ein echtes Backend zu integrieren und suchten nach einer Behelfslösung.
@@ -24,7 +25,8 @@ Mit dem Entschluss war die grobe Planung abgeschlossen und die Umsetzung konnte 
 
 ### Umsetzung
 
-Wie in der Planung bereits erwähnt, war unser Ausgangspunkt eine im Voraus erstellte „Personendatenbank“ in welcher wir eine mySQL-Datenbank mit Python erstellen und verwalten. Diese Verknüpfung wurde durch die Python-Bibliothek „mysql-connector“ realisiert. Um die Administration der Datenbank in Python zu ermöglichen wurden folgende Funktionalitäten implementiert:
+Wie in der Planung bereits erwähnt, war unser Ausgangspunkt eine im Voraus erstellte „Personendatenbank“ in welcher wir eine mySQL-Datenbank mit Python erstellen und verwalten. Diese Verknüpfung wurde durch die Python-Bibliothek „mysql-connector“ realisiert.  
+Um die Administration der Datenbank in Python zu ermöglichen wurden folgende Funktionalitäten implementiert:
 
 - Eine Datenbank namens "lastMinuteCampingTentEdition" wird erstellt, sofern sie noch nicht existiert
 - Eine Tabelle namens "dataTable" wird erstellt, sofern sie in der Datenbank noch nicht existiert
@@ -45,7 +47,7 @@ Mögliche, folgende Parameter hingegen sind variabel und werden der Funktion dah
 <p align="center"><img src="./docs/EingabeOptionen.png" alt="vollständige Handlung" width="25%"></p>
 
 Der Datenbank-Server wird in Form eines mySQL-Servers über das frei verfügbare Programm "XAMPP" lokal bereit gestellt.  
-Sobald eine Funktion aufgerufen wird, welche mit der Datenbank arbeitet, soll unser Python Programm mit Hilfe des mysql-connectors mit diesem mySQL-Server kommunizieren.
+Sobald eine Funktion aufgerufen wird, welche mit der Datenbank arbeitet, soll unser Python Programm mit Hilfe des mysql-connectors mit diesem mySQL-Server kommunizieren.  
 Als relevante Attribute für unsere Datenbank, haben wir uns für die Folgenden entschieden:
 
 - Name des Campingplatzes
@@ -58,7 +60,7 @@ Als relevante Attribute für unsere Datenbank, haben wir uns für die Folgenden 
 - diverse Extras (WC, dusche, spielplatz, tiereErlaubt, barrierefrei, bademöglichkeit, kiosk, WLAN, strom, waschmaschine)
 - Eine BildURL für die spätere Darstellung auf der Webseite
 
-Der Einfachheit halber hat jeder Zeltplatz auf einem Campingplatz zu jeder Zeit den selben Preis, zudem gelten die identischen Öffnungs- und Schließzeiten des ganze Jahr über.
+Der Einfachheit halber hat jeder Zeltplatz auf einem Campingplatz zu jeder Zeit den selben Preis, zudem gelten die identischen Öffnungs- und Schließzeiten des ganze Jahr über.  
 Das Resultat des ersten Aufrufes des Python-Scripts sah nun wie folgt aus:
 
 <p align="center"><img src="./docs/Datenbank.png" alt="vollständige Handlung" width="50%"></p>
@@ -92,8 +94,17 @@ Damit war die Umsetzung abgeschlossen.
 
 ### Bewertung
 
-Wie zu erwarten lief auch bei diesem Projekt nicht alles so wie geplant.
+Die Zielsetzung lautete:
 
-Für die Uhrzeiten der Attribute ÖffnungszeitenAnfang und ÖffnungszeitenEnde hätte man besser den Datentypen "TIME" verwendet. Die Integration in die data.json Datei führte hierbei allerdings zu Fehlern, sodass wir uns für den Datentypen VARCHAR(5) entschieden.
-Den Bewertungen hätte man außerdem besser den Datentypen "DECIMAL(3, 1)", sowie dem Preis besser den Datentypen "DECIMAL(7, 2)" zugewiesen, aber auch hier führte die Integration in die data.json Datei zu Fehlern, sodass wir uns hier für die Datentypen VARCHAR(3) bzw. VARCHAR(7) entschieden.
-Da alle Bild-URLs unserer Testdaten weniger als 255 Zeichen besitzen, haben wir hierfür VARCHAR(255) gewählt. In der Realität gibt es aber teilweise auch deutlich längere URLs, sodass man hierfür eventuell besser den Datentypen "TEXT" hätte verwenden sollen. Dies hat jedoch auch Einfluss auf die Performance des Datenaustausches.
+- "Die Programmiersprache Python verwenden"
+  - Wurde erfüllt. Python fungiert bei uns als Eingabe- und Verwaltungswerkzeug z.B. für einen Administrator
+- "Speichern von Daten in einer Datenbank (SQLite3, MySQL oder ähnliches)"
+  - Wurde ebenfalls erfüllt. Unsere Datenbank wurde in mySQL erstellt.
+- "sinnvolle Verwendung der Daten"
+  - Auch dieses Ziel wurde mehr oder minder erfüllt. Unsere Daten dienen als Informationsquelle für Camper die auf der Suche nach einem Zeltplatz sind. Die Website existiert allerdings nur lokal, zu Anschauungszwecken.
+
+Wie zu erwarten lief aber auch bei diesem Projekt nicht alles so wie geplant:
+
+- Für die Uhrzeiten der Attribute ÖffnungszeitenAnfang und ÖffnungszeitenEnde hätte man besser den Datentypen "TIME" verwendet. Die Integration in die data.json Datei führte hierbei allerdings zu Fehlern, sodass wir uns für den Datentypen VARCHAR(5) entschieden.
+- Den Bewertungen hätte man außerdem besser den Datentypen "DECIMAL(3, 1)", sowie dem Preis besser den Datentypen "DECIMAL(7, 2)" zugewiesen, aber auch hier führte die Integration in die data.json Datei zu Fehlern, sodass wir uns hier für die Datentypen VARCHAR(3) bzw. VARCHAR(7) entschieden.
+- Da alle Bild-URLs unserer Testdaten weniger als 255 Zeichen besitzen, haben wir hierfür VARCHAR(255) gewählt. In der Realität gibt es aber teilweise auch deutlich längere URLs, sodass man hierfür eventuell besser den Datentypen "TEXT" hätte verwenden sollen. Dies hat jedoch auch Einfluss auf die Performance des Datenaustausches.
