@@ -67,7 +67,23 @@ Durch die Implemierung einer "seeder"-Funktion ist es möglich vordefinierte Tes
 
 <p align="center"><img src="./docs/Datensätze.png" alt="vollständige Handlung" width="90%"></p>
 
-Als nächstes befassten wir uns mir der Erstellung des Front-Ends durch das JavaScript-Framework Vue.  
-Ziel war es hier, einen Anlaufpunkt für Interessenten zu erstellen, durch welchen der Benutzer die Datenbank nach für ihn relevanten Einträgen durchsuchen und filtern kann.  
-Dadurch, dass das Front-End aber nicht direkt auf die Datenbank zugreifen kann, haben wir uns hier mit der Erstellung einer "data.json"-Datei als Zwischenspeicher beholfen.
-Diese Datei wurde so implementiert, dass sie, jedes Mal wenn wir Daten in die Datenbank übertragen oder vorhandenene Datensätze verändern, geleert wird, die Datenbank erneut ausgelesen wird und die Daten neu in die data.json geschrieben werden.
+Als nächstes befassten wir uns mit der Überführung unserer Daten in ein Front-End. Bei uns sollte dies durch das JavaScript-Framework Vue realisiert werden.  
+Dadurch, dass das Front-End aber nicht direkt auf die Datenbank zugreifen kann, haben wir uns mit der Erstellung einer "data.json"-Datei als Zwischenspeicher beholfen.
+Diese Datei wurde so implementiert, dass sie, jedes Mal wenn wir Daten in die Datenbank übertragen oder vorhandenene Datensätze verändern, geleert wird, die Datenbank erneut ausgelesen wird und die Daten neu in die data.json geschrieben werden.  
+Die Funktion welche die Daten aus der Datenbank in data.json schreibt sieht dabei folgendermaßen aus:
+
+<p align="center"><img src="./docs/writeToDatabase.png" alt="vollständige Handlung" width="40%"></p>
+
+Als Ergebnis erhalten wir folgendes Datenformat mit welchem wir in Vue weiter arbeiten können:
+
+<p align="center"><img src="./docs/JSON.png" alt="vollständige Handlung" width="50%"></p>
+
+Durch die implementierung von "node.js" und des "node package managers" (npm) ist es möglich, lokal, einen live-Server zu starten, welcher das Vue "Template" (welches als eine Art HTML-Äquivalent fungiert) im Browser visualisiert. Dadurch kann jeder Entwicklungsschritt in Vue, live im Browser verfolgt werden was die Entwicklung selbst wiederum deutlich angenehmer gestaltet.
+
+Die Zielsetzung unseres Front-Ends war es, einen Anlaufpunkt für Interessenten zu erstellen, durch welchen der Benutzer die Datenbank nach für ihn relevanten Einträgen durchsuchen und filtern kann.  
+Gleichzeitig sollte auch das Layout den Benutzer nicht allzu sehr abschrecken.  
+Hierfür wurde am linken Rand der Website ein Abschnitt erstellt, welcher nach den von uns in Python definierten Extras filtert (da es sich um Daten des Typs Boolean handelt wird hier zwischen True und False unterschieden). Zusätzlich beinhaltet der Abschnitt einen Filter im welchem Bewertungen von 1 - 5 Sternen auswählbar sind sowie einen Filter, in welchem ein maximaler Preis pro Tag und Zeltplatz eingegeben werden kann.  
+Im oberen Bereich der Seite finden wir den Namen unseres Projekts sowie ein Suchfeld darunter. Dieses kann verwendet werden um nach Campingplatznamen sowie nach Orten zu suchen.  
+Im unteren Bereich befindet sich der wichtigste Teil der Webseite. Ein Container welcher alle in der Datenbank enthaltenen Datensätze wiedergibt, sofern kein Filter angewählt oder Text in das Suchfeld eingegeben wurde.
+
+Da alle Bild-URLs unserer Testdaten weniger als 255 Zeichen besitzen, haben wir hierfür VARCHAR(255) gewählt. In der Realität gibt es teilweise auch deutlich längere URLs, sodass man hierfür besser den Datentypen "TEXT" verwenden sollte. Dies hat jedoch auch Einfluss auf die Performance des Datenaustausches.
