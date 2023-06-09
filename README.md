@@ -44,4 +44,9 @@ Mögliche, folgende Parameter hingegen sind variabel und werden der Funktion dah
 
 <p align="center"><img src="./docs/EingabeOptionen.png" alt="vollständige Handlung" width="30%"></p>
 
-Der Datenbank-Server wird durch einen mySql-Server über das kostenlose Programm "XAMPP" realisiert.
+Der Datenbank-Server wird in Form eines mySQL-Server über das frei verfügbare Programm "XAMPP" bereit gestellt.  
+Sobald eine Funktion aufgerufen wird, welche mit der Datenbank arbeitet, kommuniziert unser Python Programm mit diesem mySQL-Server.
+
+Das Resultat des ersten Aufrufes des Python-Scripts sah nun wie folgt aus:
+
+<p align="center"><img src="./docs/Datenbank.png" alt="vollständige Handlung" width="30%"></p>
