@@ -19,7 +19,7 @@ def createTabelle():
 
     mycursor = mydb.cursor()
     mycursor.execute(
-        "CREATE TABLE IF NOT EXISTS dataTable (id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(50), postleitzahl VARCHAR(5), ort VARCHAR(30), straße VARCHAR(30), hausnummer VARCHAR(15), telefonnummer VARCHAR(30), öffnungszeitenAnfang VARCHAR(5), öffnungszeitenEnde VARCHAR(5), bewertung VARCHAR(3), preis VARCHAR(6), anzahlFreierPlätze VARCHAR(5), WC VARCHAR(4), dusche VARCHAR(4), spielplatz VARCHAR(4), tiereErlaubt VARCHAR(4), barrierefrei VARCHAR(4), bademöglichkeit VARCHAR(4), kiosk VARCHAR(4), WLAN VARCHAR(4), strom VARCHAR(4), waschmaschine VARCHAR(4), bildLink VARCHAR(255))"
+        "CREATE TABLE IF NOT EXISTS dataTable (id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(50), postleitzahl VARCHAR(5), ort VARCHAR(30), straße VARCHAR(30), hausnummer VARCHAR(15), telefonnummer VARCHAR(30), öffnungszeitenAnfang VARCHAR(5), öffnungszeitenEnde VARCHAR(5), bewertung VARCHAR(3), preis VARCHAR(6), anzahlFreierPlätze VARCHAR(5), WC BOOLEAN, dusche BOOLEAN, spielplatz BOOLEAN, tiereErlaubt BOOLEAN, barrierefrei BOOLEAN, bademöglichkeit BOOLEAN, kiosk BOOLEAN, WLAN BOOLEAN, strom BOOLEAN, waschmaschine BOOLEAN, bildLink VARCHAR(255))"
     )
 
 #Fügt der Tabelle einen Datensatz hinzu und führt dann die writeToJSON Funktion aus (siehe unten), sofern der Name in der Datenbank noch nicht vorhanden ist
@@ -184,22 +184,22 @@ def deleteCampingplatz(name):
 #Fügt der Datenbank zur Veranschaulichung Testdaten hinzu.
 def seeder():
     addCampingplatz(
-        "Nature camping","18403","Nature","Naturestreet","5","0436543","00:00","24:00","4.3","22.00","11","Ja","Ja","Nein","Ja","Ja","Ja","Ja","Nein","Ja","Ja","https://www.usnews.com/object/image/00000172-0a48-dd19-af73-dfc9adc60000/1-intro.jpg?update-time=1589312815886&size=responsive640"
+        "Nature camping","18403","Nature","Naturestreet","5","0436543","00:00","24:00","4.3","22.00","11",True,True,False,True,True,True,True,False,True,True,"https://www.usnews.com/object/image/00000172-0a48-dd19-af73-dfc9adc60000/1-intro.jpg?update-time=1589312815886&size=responsive640"
     )
     addCampingplatz(
-        "Forest camping","24500","Neuwald","Neuer waldweg","13","04046387387436543","08:00","21:00","4.5","20.00","7","Ja","Ja","Ja","Ja","Ja","Nein","Ja","Ja","Ja","Nein","https://eurekacamping.johnsonoutdoors.com/sites/default/files/tent-camping-at-sunset.jpg"
+        "Forest camping","24500","Neuwald","Neuer waldweg","13","04046387387436543","08:00","21:00","4.5","20.00","7",True,True,True,True,True,False,True,True,True,False,"https://eurekacamping.johnsonoutdoors.com/sites/default/files/tent-camping-at-sunset.jpg"
     )
     addCampingplatz(
-        "Nok camping","24768","Rendsburg","Kanalstra\u00dfe","66a","04356374356","06:00","22:00","3.9","12.80","35","Ja","Ja","Ja","Ja","Nein","Ja","Nein","Nein","Ja","Ja","https://mediafiles.urlaubsguru.de/wp-content/uploads/2015/04/three-friends-camping-on-mountain-at-sunset-istock_48107094_xlarge-2.jpg"
+        "Nok camping","24768","Rendsburg","Kanalstra\u00dfe","66a","04356374356","06:00","22:00","3.9","12.80","35",True,True,True,True,False,True,False,False,True,True,"https://mediafiles.urlaubsguru.de/wp-content/uploads/2015/04/three-friends-camping-on-mountain-at-sunset-istock_48107094_xlarge-2.jpg"
     )
     addCampingplatz(
-        "Neum\u00fcnster camping","24536","Neum\u00fcnster","Hauptstra\u00dfe","18a","0785486732","07:00","21:00","3.3","16.50","52","Ja","Ja","Nein","Nein","Ja","Nein","Ja","Ja","Ja","Ja","https://www.fnp.de/bilder/2020/09/04/90037396/23894747-teilweise-kann-wildcampen-in-deutschland-richtig-teuer-werden-3sfe.jpg"
+        "Neum\u00fcnster camping","24536","Neum\u00fcnster","Hauptstra\u00dfe","18a","0785486732","07:00","21:00","3.3","16.50","52",True,True,False,False,True,False,True,True,True,True,"https://www.fnp.de/bilder/2020/09/04/90037396/23894747-teilweise-kann-wildcampen-in-deutschland-richtig-teuer-werden-3sfe.jpg"
     )
     addCampingplatz(
-        "Bordesholm camping","25235","Bordesholm","Dorfstra\u00dfe","12","075837443543","08:00","20:00","4.6","13.50","24","Ja","Ja","Ja","Ja","Ja","Ja","Nein","Nein","Nein","Nein","https://blog-6aa0.kxcdn.com/wp-content/uploads/2021/02/camping-reiseziele-in-deutschland-titel-bild.jpg"
+        "Bordesholm camping","25235","Bordesholm","Dorfstra\u00dfe","12","075837443543","08:00","20:00","4.6","13.50","24",True,True,True,True,True,True,False,False,False,False,"https://blog-6aa0.kxcdn.com/wp-content/uploads/2021/02/camping-reiseziele-in-deutschland-titel-bild.jpg"
     )
     addCampingplatz(
-        "Kieler campingparadies","28764","Kiel","Achterbahn","65","04376587353","10:00","19:00","2.3","75.60","45","Ja","Ja","Nein","Nein","Nein","Nein","Ja","Nein","Nein","Nein","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCTvreuZjNlKBC3gZGOCjPMnrjfpZxzeYHDhmhGTIVwa3IzRXoUaeUMRAPlyGRQb30Jw4&usqp=CAU"
+        "Kieler campingparadies","28764","Kiel","Achterbahn","65","04376587353","10:00","19:00","2.3","75.60","45",True,True,False,False,False,False,True,False,False,False,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCTvreuZjNlKBC3gZGOCjPMnrjfpZxzeYHDhmhGTIVwa3IzRXoUaeUMRAPlyGRQb30Jw4&usqp=CAU"
     )
     
 #Die komplette Zabelle wird aus der Datenbank ausgelesen, in eine liste von Objekten überführt und anschließend in einer .JSON Datei gespeichert, 
@@ -321,43 +321,43 @@ while goOn:
             f"\n\033[1mWie viele Plätze sind bei {campingplatzName} aktuell frei? \nFreie Plätze: \033[0m"
         )
         campingplatzWC = input(
-            f"\n\033[1mSind bei {campingplatzName} WC's vorhanden? (Ja/Nein) \nWC's vorhanden: \033[0m"
+            f"\n\033[1mSind bei {campingplatzName} WC's vorhanden? (True/False) \nWC's vorhanden: \033[0m"
         )
         campingplatzWC = campingplatzWC.capitalize()
         campingplatzDusche = input(
-            f"\n\033[1mSind bei {campingplatzName} Duschen vorhanden? (Ja/Nein) \nDuschen vorhanden: \033[0m"
+            f"\n\033[1mSind bei {campingplatzName} Duschen vorhanden? (True/False) \nDuschen vorhanden: \033[0m"
         )
         campingplatzDusche = campingplatzDusche.capitalize()
         campingplatzSpielplatz = input(
-            f"\n\033[1mSind bei {campingplatzName} Spielplätze vorhanden? (Ja/Nein) \nSpielplätze vorhanden: \033[0m"
+            f"\n\033[1mSind bei {campingplatzName} Spielplätze vorhanden? (True/False) \nSpielplätze vorhanden: \033[0m"
         )
         campingplatzSpielplatz = campingplatzSpielplatz.capitalize()
         campingplatzHaustiere = input(
-            f"\n\033[1mSind bei {campingplatzName} Haustiere erlaubt? (Ja/Nein) \nHaustiere erlaubt: \033[0m"
+            f"\n\033[1mSind bei {campingplatzName} Haustiere erlaubt? (True/False) \nHaustiere erlaubt: \033[0m"
         )
         campingplatzHaustiere = campingplatzHaustiere.capitalize()
         campingplatzBarrierefrei = input(
-            f"\n\033[1mIst {campingplatzName} barrierefrei? (Ja/Nein) \nIst barrierefrei: \033[0m"
+            f"\n\033[1mIst {campingplatzName} barrierefrei? (True/False) \nIst barrierefrei: \033[0m"
         )
         campingplatzBarrierefrei = campingplatzBarrierefrei.capitalize()
         campingplatzBademöglichkeit = input(
-            f"\n\033[1mSind bei {campingplatzName} Bademöglichkeiten vorhanden? (Ja/Nein) \nBademöglichkeiten vorhanden: \033[0m"
+            f"\n\033[1mSind bei {campingplatzName} Bademöglichkeiten vorhanden? (True/False) \nBademöglichkeiten vorhanden: \033[0m"
         )
         campingplatzBademöglichkeit = campingplatzBademöglichkeit.capitalize()
         campingplatzKiosk = input(
-            f"\n\033[1mIst bei {campingplatzName} ein Kiosk vorhanden? (Ja/Nein) \nKiosk vorhanden: \033[0m"
+            f"\n\033[1mIst bei {campingplatzName} ein Kiosk vorhanden? (True/False) \nKiosk vorhanden: \033[0m"
         )
         campingplatzKiosk = campingplatzKiosk.capitalize()
         campingplatzWLAN = input(
-            f"\n\033[1mIst bei {campingplatzName} WLAN verfügbar? (Ja/Nein) \nWLAN verfügbar: \033[0m"
+            f"\n\033[1mIst bei {campingplatzName} WLAN verfügbar? (True/False) \nWLAN verfügbar: \033[0m"
         )
         campingplatzWLAN = campingplatzWLAN.capitalize()
         campingplatzStrom = input(
-            f"\n\033[1mIst bei {campingplatzName} Strom verfügbar? (Ja/Nein) \nStrom verfügbar: \033[0m"
+            f"\n\033[1mIst bei {campingplatzName} Strom verfügbar? (True/False) \nStrom verfügbar: \033[0m"
         )
         campingplatzStrom = campingplatzStrom.capitalize()
         campingplatzWaschmaschine = input(
-            f"\n\033[1mSind bei {campingplatzName} Waschmaschinen vorhanden? (Ja/Nein) \nWaschmaschinen vorhanden: \033[0m"
+            f"\n\033[1mSind bei {campingplatzName} Waschmaschinen vorhanden? (True/False) \nWaschmaschinen vorhanden: \033[0m"
         )
         campingplatzWaschmaschine = campingplatzWaschmaschine.capitalize()
         campingplatzBildLink = input(
