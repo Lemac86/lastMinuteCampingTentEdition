@@ -154,6 +154,6 @@ Die Zielsetzung lautete:
 <p><br></p>
 Wie zu erwarten lief aber auch bei diesem Projekt nicht alles so wie geplant:
 
-- Für die Uhrzeiten der Attribute ÖffnungszeitenAnfang und ÖffnungszeitenEnde hätte man besser den Datentypen "TIME" verwendet. Die Integration in die data.json Datei führte hierbei allerdings zu Fehlern, sodass wir uns für den Datentypen VARCHAR(5) entschieden.
-- Den Bewertungen hätte man außerdem besser den Datentypen "DECIMAL(3, 1)", sowie dem Preis besser den Datentypen "DECIMAL(7, 2)" zugewiesen, aber auch hier führte die Integration in die data.json Datei zu Fehlern, sodass wir uns hier für die Datentypen VARCHAR(3) bzw. VARCHAR(7) entschieden.
-- Da alle Bild-URLs unserer Testdaten weniger als 255 Zeichen besitzen, haben wir hierfür VARCHAR(255) gewählt. In der Realität gibt es aber teilweise auch deutlich längere URLs, sodass man hierfür eventuell besser den Datentypen "TEXT" hätte verwenden sollen. Dies hat jedoch auch Einfluss auf die Performance des Datenaustausches.
+- Für die Uhrzeiten der Attribute ÖffnungszeitenAnfang und ÖffnungszeitenEnde hätte man besser den Datentypen "TIME" verwendet. Die Integration in die data.json Datei führte hierbei allerdings zu Fehlern, sodass wir uns für den Datentypen "VARCHAR(5)" entschieden.
+- Den Bewertungen hätte man außerdem besser den Datentypen "DECIMAL(3, 1)", sowie dem Preis besser den Datentypen "DECIMAL(7, 2)" zugewiesen, aber auch hier führte die Integration in die data.json Datei zu Fehlern, sodass wir uns hier für die Datentypen "VARCHAR(3)" bzw. "VARCHAR(7)" entschieden.
+- Da alle Bild-URLs unserer Testdaten weniger als 255 Zeichen besitzen, haben wir hierfür "VARCHAR(255)" gewählt. In der Realität gibt es aber teilweise auch deutlich längere URLs, sodass man hierfür eventuell besser den Datentypen "TEXT" hätte verwenden sollen. Dies hat jedoch auch Einfluss auf die Performance des Datenaustausches.
