@@ -202,7 +202,7 @@ def seeder():
         "Kieler campingparadies","28764","Kiel","Achterbahn","65","04376587353","10:00","19:00","2.3","75.60","45",True,True,False,False,False,False,True,False,False,False,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCTvreuZjNlKBC3gZGOCjPMnrjfpZxzeYHDhmhGTIVwa3IzRXoUaeUMRAPlyGRQb30Jw4&usqp=CAU"
     )
     
-#Die komplette Zabelle wird aus der Datenbank ausgelesen, in eine liste von Objekten überführt und anschließend in einer .JSON Datei gespeichert, 
+#Die komplette Tabelle wird aus der Datenbank ausgelesen, in eine liste von Objekten überführt und anschließend in einer .JSON Datei gespeichert, 
 # welche von unserem Front-End als Datenquelle verwendet wird. Da nach jeder Veränderung der Daten in der Datenbank auch die .JSON Datei neu erstellt wird, 
 # kann man diese als Zwischenspeicher ansehen wobei die datenbank weiterhin als "Source-of-truth" fungiert.
 def writeDatabaseToJSON():

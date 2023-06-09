@@ -123,23 +123,20 @@ let inputArray = data;
 const displayedArray = computed(() =>
   inputArray.filter(
     (e) =>
-      ((filters.value.WC && e.WC == "Ja") || filters.value.WC == false) &&
-      ((filters.value.dusche && e.dusche == "Ja") ||
-        filters.value.dusche == false) &&
-      ((filters.value.spielplatz && e.spielplatz == "Ja") ||
+      ((filters.value.WC && e.WC) || filters.value.WC == false) &&
+      ((filters.value.dusche && e.dusche) || filters.value.dusche == false) &&
+      ((filters.value.spielplatz && e.spielplatz) ||
         filters.value.spielplatz == false) &&
-      ((filters.value.haustiere && e.haustiere == "Ja") ||
+      ((filters.value.haustiere && e.haustiere) ||
         filters.value.haustiere == false) &&
-      ((filters.value.barrierefrei && e.barrierefrei == "Ja") ||
+      ((filters.value.barrierefrei && e.barrierefrei) ||
         filters.value.barrierefrei == false) &&
-      ((filters.value.bademöglichkeit && e.bademöglichkeit == "Ja") ||
+      ((filters.value.bademöglichkeit && e.bademöglichkeit) ||
         filters.value.bademöglichkeit == false) &&
-      ((filters.value.kiosk && e.kiosk == "Ja") ||
-        filters.value.kiosk == false) &&
-      ((filters.value.WLAN && e.WLAN == "Ja") || filters.value.WLAN == false) &&
-      ((filters.value.strom && e.strom == "Ja") ||
-        filters.value.strom == false) &&
-      ((filters.value.waschmaschine && e.waschmaschine == "Ja") ||
+      ((filters.value.kiosk && e.kiosk) || filters.value.kiosk == false) &&
+      ((filters.value.WLAN && e.WLAN) || filters.value.WLAN == false) &&
+      ((filters.value.strom && e.strom) || filters.value.strom == false) &&
+      ((filters.value.waschmaschine && e.waschmaschine) ||
         filters.value.waschmaschine == false) &&
       (!minBewertung.value ||
         parseFloat(e.bewertung) > parseFloat(minBewertung.value)) &&

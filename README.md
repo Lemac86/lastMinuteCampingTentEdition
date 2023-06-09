@@ -42,11 +42,32 @@ Welche Option sich hinter welcher Zahl verbirgt wird nach jedem Durchlauf, aufge
 Da es sich bei den Optionen um sich wiederholende Abläufe handelt, wurden sie in Form von Funktionen in das Programm implementiert.  
 Mögliche, folgende Parameter hingegen sind variabel und werden der Funktion daher bei der Ausführung bereitgestellt und berücksichtigt.
 
-<p align="center"><img src="./docs/EingabeOptionen.png" alt="vollständige Handlung" width="30%"></p>
+<p align="center"><img src="./docs/EingabeOptionen.png" alt="vollständige Handlung" width="25%"></p>
 
-Der Datenbank-Server wird in Form eines mySQL-Server über das frei verfügbare Programm "XAMPP" bereit gestellt.  
-Sobald eine Funktion aufgerufen wird, welche mit der Datenbank arbeitet, kommuniziert unser Python Programm mit diesem mySQL-Server.
+Der Datenbank-Server wird in Form eines mySQL-Servers über das frei verfügbare Programm "XAMPP" lokal bereit gestellt.  
+Sobald eine Funktion aufgerufen wird, welche mit der Datenbank arbeitet, soll unser Python Programm mit Hilfe des mysql-connectors mit diesem mySQL-Server kommunizieren.
+Als relevante Attribute für unsere Datenbank, haben wir uns für die Folgenden entschieden:
 
+- Name des Campingplatzes
+- Adresse des Campingplatzes (atomar)
+- Telefonnummer
+- Öffnungs- und Schließzeiten
+- Bewertung
+- Preis
+- Anzahl freier Zeltplätze
+- diverse Extras (WC, dusche, spielplatz, tiereErlaubt, barrierefrei, bademöglichkeit, kiosk, WLAN, strom, waschmaschine)
+- Eine BildURL für die spätere Darstellung auf der Webseite
+
+Der Einfachheit halber hat jeder Zeltplatz auf einem Campingplatz zu jeder Zeit den selben Preis, zudem gelten die identischen Öffnungs- und Schließzeiten des ganze Jahr über.
 Das Resultat des ersten Aufrufes des Python-Scripts sah nun wie folgt aus:
 
-<p align="center"><img src="./docs/Datenbank.png" alt="vollständige Handlung" width="30%"></p>
+<p align="center"><img src="./docs/Datenbank.png" alt="vollständige Handlung" width="50%"></p>
+
+Durch die Implemierung einer "seeder"-Funktion ist es möglich vordefinierte Testdaten in die Datenbank zu integrieren, welche wir zur Anschauung verwenden wollen.
+
+<p align="center"><img src="./docs/Datensätze.png" alt="vollständige Handlung" width="90%"></p>
+
+Als nächstes befassten wir uns mir der Erstellung des Front-Ends durch das JavaScript-Framework Vue.  
+Ziel war es hier, einen Anlaufpunkt für Interessenten zu erstellen, durch welchen der Benutzer die Datenbank nach für ihn relevanten Einträgen durchsuchen und filtern kann.  
+Dadurch, dass das Front-End aber nicht direkt auf die Datenbank zugreifen kann, haben wir uns hier mit der Erstellung einer "data.json"-Datei als Zwischenspeicher beholfen.
+Diese Datei wurde so implementiert, dass sie, jedes Mal wenn wir Daten in die Datenbank übertragen oder vorhandenene Datensätze verändern, geleert wird, die Datenbank erneut ausgelesen wird und die Daten neu in die data.json geschrieben werden.
