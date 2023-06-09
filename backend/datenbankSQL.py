@@ -19,7 +19,7 @@ def createTabelle():
 
     mycursor = mydb.cursor()
     mycursor.execute(
-        "CREATE TABLE IF NOT EXISTS dataTable (id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(50), postleitzahl VARCHAR(5), ort VARCHAR(30), straße VARCHAR(30), hausnummer VARCHAR(15), telefonnummer VARCHAR(30), öffnungszeitenAnfang VARCHAR(5), öffnungszeitenEnde VARCHAR(5), bewertung VARCHAR(3), preis VARCHAR(6), anzahlFreierPlätze VARCHAR(5), WC BOOLEAN, dusche BOOLEAN, spielplatz BOOLEAN, tiereErlaubt BOOLEAN, barrierefrei BOOLEAN, bademöglichkeit BOOLEAN, kiosk BOOLEAN, WLAN BOOLEAN, strom BOOLEAN, waschmaschine BOOLEAN, bildLink VARCHAR(255))"
+        "CREATE TABLE IF NOT EXISTS dataTable (id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(50), postleitzahl VARCHAR(5), ort VARCHAR(30), straße VARCHAR(30), hausnummer VARCHAR(15), telefonnummer VARCHAR(30), öffnungszeitenAnfang VARCHAR(5), öffnungszeitenEnde VARCHAR(5), bewertung VARCHAR(3), preis VARCHAR(7), anzahlFreierPlätze SMALLINT, WC BOOLEAN, dusche BOOLEAN, spielplatz BOOLEAN, tiereErlaubt BOOLEAN, barrierefrei BOOLEAN, bademöglichkeit BOOLEAN, kiosk BOOLEAN, WLAN BOOLEAN, strom BOOLEAN, waschmaschine BOOLEAN, bildLink VARCHAR(255))"
     )
 
 #Fügt der Tabelle einen Datensatz hinzu und führt dann die writeToJSON Funktion aus (siehe unten), sofern der Name in der Datenbank noch nicht vorhanden ist
