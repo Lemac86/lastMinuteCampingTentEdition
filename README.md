@@ -24,7 +24,7 @@ Die Entscheidung war also gefallen.
 Da wir in den Wochen zuvor bereits daran gearbeitet hatten eine Datenbank in Python zu erstellen war auch der Ausgangspunkt für das Projekt schnell gefunden.  
 Um das Projekt überschaubarer und anschaulicher zu halten, als auch aufgrund des knappen Zeitrahmens, entschieden wir uns, keine Kopie der Datenbank aus dem ersten Halbjahr zu erstellen, sondern eine neue, kompaktere Version dieser zu entwickeln. Die „Tent Editon“ war geboren, welche sich ausschließlich auf Camper mit Zelt fokussieren sollte.
 
-<p><br><br><br></p>
+<p><br></p>
 
 Als Nächstes beschäftigten wir uns mit der sinnvollen Verwendung unserer Datenbank und der enthaltenen Daten. In unserem Projekt im ersten Halbjahr wurden viele Informationen in eine Datenbank eingepflegt und konnten auch jederzeit vom betreffenden Administrator verändert werden, aber von außen einsehen, geschweige denn als möglicher Interessent hiermit zu interagieren war leider nicht möglich. Aber wie wollten wir unsere Daten weiterverarbeiten? Da es sich um eine Übersicht zu Campingplätzen sowie deren freie Kapazitäten handelt war der logische Entschluss unsere Daten für interessierte Camper und Camperinnen zur Verfügung zu stellen. Als eine der geläufigsten Varianten wählten wir eine browserbasierte Webansicht, welche dem zukünftigen Kunden eine intuitive und übersichtliche Darstellung unserer Daten vermitteln würde. Die Umsetzung sollte in „Vue.js“ erfolgen. Dabei handelt es sich um ein sogenanntes JavaScript-Framework, welches die Verknüpfung von HTML-, CSS- und JavaScript-Elementen stark vereinfacht und so auch den Entwicklungsprozess beschleunigt. Der große Vorteil der von uns gewählten Darstellungsform ist zudem, dass unsere Daten in jedem gängigen Internetbrowser visualisiert werden können.
 Abschließend stellte sich die Frage, wie wir ein clientseitiges Frontend, welches durch den Webbrowser dargestellt wird mit unserer Datenbank verbinden könnten. Im Normalfall regelt ein Backend den Austausch der Daten zwischen Frontend und der Datenbank. Dies geschieht z.B., um für Sicherheit zu sorgen, da der Quellcode hierdurch nicht einsehbar und manipulierbar wäre oder aber auch um Datenintegrität zu gewährleisten wobei das Backend jeden Datenaustausch validieren würde und dadurch verhindert, dass es bei zeitgleichen Zugriffen verschiedener Benutzer zu Dateninkonsistenzen kommen kann.
@@ -32,11 +32,11 @@ Da die zeitlichen Fristen für das Projekt schon sehr knapp erschienen, verwarfe
 Die Wahl fiel auf eine .JSON-Datei (JavaScript Object Notation) als Zwischenspeicher.
 Mit dem Entschluss war die grobe Planung abgeschlossen und die Umsetzung konnte beginnen.
 
-<p><br></p>
+<p><br><br></p>
+
 UML-Modell der Projektstruktur:
 
 <p align="center"><img src="./docs/UML.png" alt="UML" width="90%"></p>
-
 <p><br><br></p>
 
 ### Umsetzung
@@ -87,7 +87,8 @@ Das Resultat des ersten Aufrufes des Python-Scripts sah nun wie folgt aus:
 <p><br></p>
 
 <p align="center"><img src="./docs/Datenbank.png" alt="Datenbankstruktur" width="55%"></p>
-<p><br><br></p>
+
+<p><br><br><br></p>
 
 Durch die Implemierung einer "seeder"-Funktion ist es möglich vordefinierte Testdaten in die Datenbank zu integrieren, welche wir zur Anschauung verwenden wollen.
 
