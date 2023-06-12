@@ -1,4 +1,5 @@
 # Projekt Last Minute Camping – Tent Edition
+
 ## <p align="center">Florian Hannich - Patric Düntzsch - Tobias Beckmann</p>
 
 <p><br></p>
@@ -84,6 +85,7 @@ Der Einfachheit halber hat jeder Zeltplatz auf einem Campingplatz zu jeder Zeit 
 <p><br></p>
 
 Das Resultat des ersten Aufrufes des Python-Scripts sah nun wie folgt aus:
+
 <p><br></p>
 
 <p align="center"><img src="./docs/Datenbank.png" alt="Datenbankstruktur" width="55%"></p>
@@ -104,6 +106,7 @@ Diese Datei wurde so implementiert, dass sie, jedes Mal wenn wir Daten in die Da
 <p><br></p>
 
 Die Funktion welche die Daten aus der Datenbank in data.json schreibt sieht dabei folgendermaßen aus:
+
 <p><br></p>
 
 <p align="center"><img src="./docs/writeToDatabase.png" alt="Zwischenspeicherfunktion" width="60%"></p>
@@ -117,12 +120,12 @@ Als Ergebnis erhalten wir folgendes Datenformat mit welchem wir in Vue weiter ar
 <p>
     Durch die implementierung von "node.js" und des "node package managers" (npm) ist es möglich, lokal, einen live-Server zu starten, welcher das Vue "Template" (welches als eine Art HTML-Äquivalent fungiert) im Browser visualisiert. Dadurch kann jeder Entwicklungsschritt in Vue, live im Browser verfolgt werden was die Entwicklung selbst wiederum deutlich angenehmer gestaltet.
 
-
 Die Zielsetzung unseres Front-Ends war es, einen Anlaufpunkt für Interessenten zu erstellen, durch welchen der Benutzer die Datenbank nach für ihn relevanten Einträgen durchsuchen und filtern kann.
 Gleichzeitig sollte auch das Layout den Benutzer nicht allzu sehr abschrecken.
 Hierfür wurde am linken Rand der Website ein Abschnitt erstellt, welcher nach den von uns in Python definierten Extras filtert (da es sich um Daten des Typs Boolean handelt wird hier zwischen True und False unterschieden). Zusätzlich beinhaltet der Abschnitt einen Filter im welchem Bewertungen von 1 - 5 Sternen auswählbar sind sowie einen Filter, in welchem ein maximaler Preis pro Tag und Zeltplatz eingegeben werden kann.
 Im oberen Bereich der Seite finden wir den Namen unseres Projekts sowie ein Suchfeld darunter. Dieses kann verwendet werden um nach Campingplatznamen sowie nach Orten zu suchen.
 Im unteren Bereich befindet sich der wichtigste Teil der Webseite. Ein Container welcher alle in der Datenbank enthaltenen Datensätze wiedergibt, sofern kein Filter angewählt oder Text in das Suchfeld eingegeben wurde.
+
 </p>
 <p><br></p>
 
