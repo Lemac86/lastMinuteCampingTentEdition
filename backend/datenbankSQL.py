@@ -1,19 +1,20 @@
-import mysql.connector
+from mysql.connector import MySQLConnection 
 import json
 
 #Erstellt die Datenbank "lastMinuteCampingTentEdition" sofern sie noch nicht existiert
 def createDatenbank():
-    mydb = mysql.connector.connect(
+    mydb = MySQLConnection(
         host="localhost",
         user="root",
     )
 
     mycursor = mydb.cursor()
     mycursor.execute("CREATE DATABASE IF NOT EXISTS lastMinuteCampingTentEdition")
+    mydb.close()
 
 #Erstellt die Tabelle "dataTable" sofern sie noch nicht existiert mit - in .execute - definierten Datentypen und -größen
 def createTabelle():
-    mydb = mysql.connector.connect(
+    mydb = MySQLConnection(
         host="localhost", user="root", database="lastMinuteCampingTentEdition"
     )
 
@@ -21,6 +22,7 @@ def createTabelle():
     mycursor.execute(
         "CREATE TABLE IF NOT EXISTS dataTable (id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(50), postleitzahl VARCHAR(5), ort VARCHAR(30), straße VARCHAR(30), hausnummer VARCHAR(15), telefonnummer VARCHAR(30), öffnungszeitenAnfang VARCHAR(5), öffnungszeitenEnde VARCHAR(5), bewertung VARCHAR(3), preis VARCHAR(7), anzahlFreierPlätze SMALLINT, WC BOOLEAN, dusche BOOLEAN, spielplatz BOOLEAN, tiereErlaubt BOOLEAN, barrierefrei BOOLEAN, bademöglichkeit BOOLEAN, kiosk BOOLEAN, WLAN BOOLEAN, strom BOOLEAN, waschmaschine BOOLEAN, bildLink VARCHAR(255))"
     )
+    mydb.close()
 
 #Fügt der Tabelle einen Datensatz hinzu und führt dann die writeToJSON Funktion aus (siehe unten), sofern der Name in der Datenbank noch nicht vorhanden ist
 def addCampingplatz(
@@ -47,7 +49,7 @@ def addCampingplatz(
     waschmaschine,
     bildLink,
 ):
-    mydb = mysql.connector.connect(
+    mydb = MySQLConnection(
         host="localhost", user="root", database="lastMinuteCampingTentEdition"
     )
     mycursor = mydb.cursor()
@@ -89,11 +91,12 @@ def addCampingplatz(
     mydb.commit()
     print(f"\n\033[1m{name} wurde der Datenbank hinzugefügt!\033[0m")
     writeDatabaseToJSON()
+    mydb.close()
         
 
 #Zeigt alle Datensätze in Form definierter Attribute an, sofern vorhanden
 def showCampingplätze():
-    mydb = mysql.connector.connect(
+    mydb = MySQLConnection(
         host="localhost", user="root", database="lastMinuteCampingTentEdition"
     )
     mycursor = mydb.cursor()
@@ -109,10 +112,11 @@ def showCampingplätze():
             )
     else:
         print("\n\033[1mEs konnten keine Einträge gefunden werden!\033[0m")
+    mydb.close()
 
 #Sucht einen bestimmten Campingplatz anhand des Namens und gibt diesen, sofern er gefunden wird, mit definierten Attributen aus
 def searchCampingplatz(name):
-    mydb = mysql.connector.connect(
+    mydb = MySQLConnection(
         host="localhost", user="root", database="lastMinuteCampingTentEdition"
     )
     name = name.capitalize()
@@ -131,11 +135,12 @@ def searchCampingplatz(name):
             )
     else:
         print(f"\n\033[1m{name} konnte in der Datenbank nicht gefunden werden!\033[0m")
+    mydb.close()
 
 #Durchsucht anhand des Namens die Datenbank nach entsprechendem Datensatz und ändert in diesem, sofern es einen Treffer gibt, die Anzahl freier Campingplätze 
 # und führt anschließend die writeToJSON Funktion aus
 def changeFreiePlätze(name, campingplatzPlätze):
-    mydb = mysql.connector.connect(
+    mydb = MySQLConnection(
         host="localhost", user="root", database="lastMinuteCampingTentEdition"
     )
     name = name.capitalize()
@@ -158,11 +163,12 @@ def changeFreiePlätze(name, campingplatzPlätze):
         writeDatabaseToJSON()
     else:
         print(f"\n\033[1m{name} konnte in der Datenbank nicht gefunden werden!\033[0m")
+    mydb.close()
     
 
 #Durchsucht die Datenbank anhand des Namens. Bei einem Treffer wird der entsprechende Datensatz gelöscht und anschließend die writeToJSON Funktion ausgeführt
 def deleteCampingplatz(name):
-    mydb = mysql.connector.connect(
+    mydb = MySQLConnection(
         host="localhost", user="root", database="lastMinuteCampingTentEdition"
     )
     name = name.capitalize()
@@ -180,6 +186,7 @@ def deleteCampingplatz(name):
         writeDatabaseToJSON()
     else:
         print(f"\n\033[1m{name} konnte in der Datenbank nicht gefunden werden!\033[0m")
+    mydb.close()
 
 #Fügt der Datenbank zur Veranschaulichung Testdaten hinzu.
 def seeder():
@@ -206,12 +213,13 @@ def seeder():
 # welche von unserem Front-End als Datenquelle verwendet wird. Da nach jeder Veränderung der Daten in der Datenbank auch die .JSON Datei neu erstellt wird, 
 # kann man diese als Zwischenspeicher ansehen wobei die datenbank weiterhin als "Source-of-truth" fungiert.
 def writeDatabaseToJSON():
-    mydb = mysql.connector.connect(
+    mydb = MySQLConnection(
         host="localhost", user="root", database="lastMinuteCampingTentEdition"
     )
     mycursor = mydb.cursor()
     mycursor.execute("SELECT * FROM dataTable")
     tabelle = mycursor.fetchall()
+    mydb.close()
     data = []
     for datensatz in tabelle:
         dateaObj = {
