@@ -1,7 +1,7 @@
-from mysql.connector import MySQLConnection 
+from mysql.connector import MySQLConnection
 import json
 
-#Erstellt die Datenbank "lastMinuteCampingTentEdition" sofern sie noch nicht existiert
+# Erstellt die Datenbank "lastMinuteCampingTentEdition" sofern sie noch nicht existiert
 def createDatenbank():
     mydb = MySQLConnection(
         host="localhost",
@@ -13,25 +13,27 @@ def createDatenbank():
     mycursor.close()
     mydb.close()
 
-#Führt die Funktion "createDatenbank" aus
+
+# Führt die Funktion "createDatenbank" aus
 createDatenbank()
 
-#Stellt eine globale Verbindung zu unserer Datenbank her
+# Stellt eine globale Verbindung zu unserer Datenbank her
 mydb = MySQLConnection(
     host="localhost", user="root", database="lastMinuteCampingTentEdition"
 )
 mycursor = mydb.cursor()
 
-#Erstellt die Tabelle "dataTable" sofern sie noch nicht existiert mit - in .execute - definierten Datentypen und -größen
+# Erstellt die Tabelle "dataTable" sofern sie noch nicht existiert mit - in .execute - definierten Datentypen und -größen
 def createTabelle():
     mycursor.execute(
         "CREATE TABLE IF NOT EXISTS dataTable (id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(50), postleitzahl VARCHAR(5), ort VARCHAR(30), straße VARCHAR(30), hausnummer VARCHAR(15), telefonnummer VARCHAR(30), öffnungszeitenAnfang VARCHAR(5), öffnungszeitenEnde VARCHAR(5), bewertung VARCHAR(3), preis VARCHAR(7), anzahlFreierPlätze SMALLINT, WC BOOLEAN, dusche BOOLEAN, spielplatz BOOLEAN, tiereErlaubt BOOLEAN, barrierefrei BOOLEAN, bademöglichkeit BOOLEAN, kiosk BOOLEAN, WLAN BOOLEAN, strom BOOLEAN, waschmaschine BOOLEAN, bildLink VARCHAR(255))"
     )
 
-#Führt die Funktion "createTabelle" aus
+
+# Führt die Funktion "createTabelle" aus
 createTabelle()
 
-#Fügt der Tabelle einen Datensatz hinzu und führt dann die writeToJSON Funktion aus (siehe unten), sofern der Name in der Datenbank noch nicht vorhanden ist
+# Fügt der Tabelle einen Datensatz hinzu und führt dann die writeToJSON Funktion aus (siehe unten), sofern der Name in der Datenbank noch nicht vorhanden ist
 def addCampingplatz(
     name,
     postleitzahl,
@@ -62,8 +64,8 @@ def addCampingplatz(
     tabelle = mycursor.fetchall()
     if tabelle:
         print(f"\n\033[1m{name} ist bereits vorhanden!\033[0m")
-        return 
-    
+        return
+
     sql = "INSERT INTO dataTable (name, postleitzahl, ort, straße, hausnummer, telefonnummer, öffnungszeitenAnfang, öffnungszeitenEnde, bewertung, preis, anzahlFreierPlätze, WC, dusche, spielplatz, tiereErlaubt, barrierefrei, bademöglichkeit, kiosk, WLAN, strom, waschmaschine, bildLink) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
     val = (
         name,
@@ -93,16 +95,16 @@ def addCampingplatz(
     mydb.commit()
     print(f"\n\033[1m{name} wurde der Datenbank hinzugefügt!\033[0m")
     writeDatabaseToJSON()
-        
 
-#Zeigt alle Datensätze in Form definierter Attribute an, sofern vorhanden
+
+# Zeigt alle Datensätze in Form definierter Attribute an, sofern vorhanden
 def showCampingplätze():
     mycursor.execute("SELECT * FROM dataTable")
     tabelle = mycursor.fetchall()
     if tabelle:
         for datensatz in tabelle:
             datenArr = []
-            for attribut in datensatz:   
+            for attribut in datensatz:
                 datenArr.append(attribut)
             print(
                 f"\033[1mName: {datenArr[1]}, Postleitzahl: {datenArr[2]}, Ort: {datenArr[3]}, Straße: {datenArr[4]}, Hausnummer: {datenArr[5]}, Telefonnummer: {datenArr[6]}\033[0m"
@@ -110,7 +112,8 @@ def showCampingplätze():
     else:
         print("\n\033[1mEs konnten keine Einträge gefunden werden!\033[0m")
 
-#Sucht einen bestimmten Campingplatz anhand des Namens und gibt diesen, sofern er gefunden wird, mit definierten Attributen aus
+
+# Sucht einen bestimmten Campingplatz anhand des Namens und gibt diesen, sofern er gefunden wird, mit definierten Attributen aus
 def searchCampingplatz(name):
     name = name.capitalize()
     sql = "SELECT * FROM dataTable WHERE name = %s"
@@ -128,7 +131,8 @@ def searchCampingplatz(name):
     else:
         print(f"\n\033[1m{name} konnte in der Datenbank nicht gefunden werden!\033[0m")
 
-#Durchsucht anhand des Namens die Datenbank nach entsprechendem Datensatz und ändert in diesem, sofern es einen Treffer gibt, die Anzahl freier Campingplätze 
+
+# Durchsucht anhand des Namens die Datenbank nach entsprechendem Datensatz und ändert in diesem, sofern es einen Treffer gibt, die Anzahl freier Campingplätze
 # und führt anschließend die writeToJSON Funktion aus
 def changeFreiePlätze(name, campingplatzPlätze):
     name = name.capitalize()
@@ -150,9 +154,9 @@ def changeFreiePlätze(name, campingplatzPlätze):
         writeDatabaseToJSON()
     else:
         print(f"\n\033[1m{name} konnte in der Datenbank nicht gefunden werden!\033[0m")
-    
 
-#Durchsucht die Datenbank anhand des Namens. Bei einem Treffer wird der entsprechende Datensatz gelöscht und anschließend die writeToJSON Funktion ausgeführt
+
+# Durchsucht die Datenbank anhand des Namens. Bei einem Treffer wird der entsprechende Datensatz gelöscht und anschließend die writeToJSON Funktion ausgeführt
 def deleteCampingplatz(name):
     name = name.capitalize()
     sql = "SELECT * FROM dataTable WHERE name = %s"
@@ -169,29 +173,157 @@ def deleteCampingplatz(name):
     else:
         print(f"\n\033[1m{name} konnte in der Datenbank nicht gefunden werden!\033[0m")
 
-#Fügt der Datenbank zur Veranschaulichung Testdaten hinzu.
+
+# Fügt der Datenbank zur Veranschaulichung Testdaten hinzu.
 def seeder():
     addCampingplatz(
-        "Nature camping","18403","Nature","Naturestreet","5","0436543","00:00","24:00","4.3","22.00","11",True,True,False,True,True,True,True,False,True,True,"https://www.usnews.com/object/image/00000172-0a48-dd19-af73-dfc9adc60000/1-intro.jpg?update-time=1589312815886&size=responsive640"
+        "Nature camping",
+        "18403",
+        "Nature",
+        "Naturestreet",
+        "5",
+        "0436543",
+        "00:00",
+        "24:00",
+        "4.3",
+        "22.00",
+        "11",
+        True,
+        True,
+        False,
+        True,
+        True,
+        True,
+        True,
+        False,
+        True,
+        True,
+        "https://www.usnews.com/object/image/00000172-0a48-dd19-af73-dfc9adc60000/1-intro.jpg?update-time=1589312815886&size=responsive640",
     )
     addCampingplatz(
-        "Forest camping","24500","Neuwald","Neuer waldweg","13","04046387387436543","08:00","21:00","4.5","20.00","7",True,True,True,True,True,False,True,True,True,False,"https://eurekacamping.johnsonoutdoors.com/sites/default/files/tent-camping-at-sunset.jpg"
+        "Forest camping",
+        "24500",
+        "Neuwald",
+        "Neuer waldweg",
+        "13",
+        "04046387387436543",
+        "08:00",
+        "21:00",
+        "4.5",
+        "20.00",
+        "7",
+        True,
+        True,
+        True,
+        True,
+        True,
+        False,
+        True,
+        True,
+        True,
+        False,
+        "https://eurekacamping.johnsonoutdoors.com/sites/default/files/tent-camping-at-sunset.jpg",
     )
     addCampingplatz(
-        "Nok camping","24768","Rendsburg","Kanalstra\u00dfe","66a","04356374356","06:00","22:00","3.9","12.80","35",True,True,True,True,False,True,False,False,True,True,"https://mediafiles.urlaubsguru.de/wp-content/uploads/2015/04/three-friends-camping-on-mountain-at-sunset-istock_48107094_xlarge-2.jpg"
+        "Nok camping",
+        "24768",
+        "Rendsburg",
+        "Kanalstra\u00dfe",
+        "66a",
+        "04356374356",
+        "06:00",
+        "22:00",
+        "3.9",
+        "12.80",
+        "35",
+        True,
+        True,
+        True,
+        True,
+        False,
+        True,
+        False,
+        False,
+        True,
+        True,
+        "https://mediafiles.urlaubsguru.de/wp-content/uploads/2015/04/three-friends-camping-on-mountain-at-sunset-istock_48107094_xlarge-2.jpg",
     )
     addCampingplatz(
-        "Neum\u00fcnster camping","24536","Neum\u00fcnster","Hauptstra\u00dfe","18a","0785486732","07:00","21:00","3.3","16.50","52",True,True,False,False,True,False,True,True,True,True,"https://www.fnp.de/bilder/2020/09/04/90037396/23894747-teilweise-kann-wildcampen-in-deutschland-richtig-teuer-werden-3sfe.jpg"
+        "Neum\u00fcnster camping",
+        "24536",
+        "Neum\u00fcnster",
+        "Hauptstra\u00dfe",
+        "18a",
+        "0785486732",
+        "07:00",
+        "21:00",
+        "3.3",
+        "16.50",
+        "52",
+        True,
+        True,
+        False,
+        False,
+        True,
+        False,
+        True,
+        True,
+        True,
+        True,
+        "https://www.fnp.de/bilder/2020/09/04/90037396/23894747-teilweise-kann-wildcampen-in-deutschland-richtig-teuer-werden-3sfe.jpg",
     )
     addCampingplatz(
-        "Bordesholm camping","25235","Bordesholm","Dorfstra\u00dfe","12","075837443543","08:00","20:00","4.6","13.50","24",True,True,True,True,True,True,False,False,False,False,"https://blog-6aa0.kxcdn.com/wp-content/uploads/2021/02/camping-reiseziele-in-deutschland-titel-bild.jpg"
+        "Bordesholm camping",
+        "25235",
+        "Bordesholm",
+        "Dorfstra\u00dfe",
+        "12",
+        "075837443543",
+        "08:00",
+        "20:00",
+        "4.6",
+        "13.50",
+        "24",
+        True,
+        True,
+        True,
+        True,
+        True,
+        True,
+        False,
+        False,
+        False,
+        False,
+        "https://blog-6aa0.kxcdn.com/wp-content/uploads/2021/02/camping-reiseziele-in-deutschland-titel-bild.jpg",
     )
     addCampingplatz(
-        "Kieler campingparadies","28764","Kiel","Achterbahn","65","04376587353","10:00","19:00","2.3","75.60","45",True,True,False,False,False,False,True,False,False,False,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCTvreuZjNlKBC3gZGOCjPMnrjfpZxzeYHDhmhGTIVwa3IzRXoUaeUMRAPlyGRQb30Jw4&usqp=CAU"
+        "Kieler campingparadies",
+        "28764",
+        "Kiel",
+        "Achterbahn",
+        "65",
+        "04376587353",
+        "10:00",
+        "19:00",
+        "2.3",
+        "75.60",
+        "45",
+        True,
+        True,
+        False,
+        False,
+        False,
+        False,
+        True,
+        False,
+        False,
+        False,
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCTvreuZjNlKBC3gZGOCjPMnrjfpZxzeYHDhmhGTIVwa3IzRXoUaeUMRAPlyGRQb30Jw4&usqp=CAU",
     )
-    
-#Die komplette Tabelle wird aus der Datenbank ausgelesen, in eine liste von Objekten überführt und anschließend in einer .JSON Datei gespeichert, 
-# welche von unserem Front-End als Datenquelle verwendet wird. Da nach jeder Veränderung der Daten in der Datenbank auch die .JSON Datei neu erstellt wird, 
+
+
+# Die komplette Tabelle wird aus der Datenbank ausgelesen, in eine liste von Objekten überführt und anschließend in einer .JSON Datei gespeichert,
+# welche von unserem Front-End als Datenquelle verwendet wird. Da nach jeder Veränderung der Daten in der Datenbank auch die .JSON Datei neu erstellt wird,
 # kann man diese als Zwischenspeicher ansehen wobei die datenbank weiterhin als "Source-of-truth" fungiert.
 def writeDatabaseToJSON():
     mycursor.execute("SELECT * FROM dataTable")
@@ -224,10 +356,11 @@ def writeDatabaseToJSON():
             "bildURL": datensatz[22],
         }
         data.append(dateaObj)
-    with open('data.json', 'w') as f:
+    with open("data.json", "w") as f:
         json.dump(data, f)
 
-#Hält die While-Schleife aufrecht
+
+# Hält die While-Schleife aufrecht
 goOn = True
 
 while goOn:
@@ -301,43 +434,43 @@ while goOn:
             f"\n\033[1mWie viele Plätze sind bei {campingplatzName} aktuell frei? \nFreie Plätze: \033[0m"
         )
         campingplatzWC = input(
-            f"\n\033[1mSind bei {campingplatzName} WC's vorhanden? (True/False) \nWC's vorhanden: \033[0m"
+            f"\n\033[1mSind bei {campingplatzName} WC's vorhanden? (1/0) \nWC's vorhanden: \033[0m"
         )
         campingplatzWC = campingplatzWC.capitalize()
         campingplatzDusche = input(
-            f"\n\033[1mSind bei {campingplatzName} Duschen vorhanden? (True/False) \nDuschen vorhanden: \033[0m"
+            f"\n\033[1mSind bei {campingplatzName} Duschen vorhanden? (1/0) \nDuschen vorhanden: \033[0m"
         )
         campingplatzDusche = campingplatzDusche.capitalize()
         campingplatzSpielplatz = input(
-            f"\n\033[1mSind bei {campingplatzName} Spielplätze vorhanden? (True/False) \nSpielplätze vorhanden: \033[0m"
+            f"\n\033[1mSind bei {campingplatzName} Spielplätze vorhanden? (1/0) \nSpielplätze vorhanden: \033[0m"
         )
         campingplatzSpielplatz = campingplatzSpielplatz.capitalize()
         campingplatzHaustiere = input(
-            f"\n\033[1mSind bei {campingplatzName} Haustiere erlaubt? (True/False) \nHaustiere erlaubt: \033[0m"
+            f"\n\033[1mSind bei {campingplatzName} Haustiere erlaubt? (1/0) \nHaustiere erlaubt: \033[0m"
         )
         campingplatzHaustiere = campingplatzHaustiere.capitalize()
         campingplatzBarrierefrei = input(
-            f"\n\033[1mIst {campingplatzName} barrierefrei? (True/False) \nIst barrierefrei: \033[0m"
+            f"\n\033[1mIst {campingplatzName} barrierefrei? (1/0) \nIst barrierefrei: \033[0m"
         )
         campingplatzBarrierefrei = campingplatzBarrierefrei.capitalize()
         campingplatzBademöglichkeit = input(
-            f"\n\033[1mSind bei {campingplatzName} Bademöglichkeiten vorhanden? (True/False) \nBademöglichkeiten vorhanden: \033[0m"
+            f"\n\033[1mSind bei {campingplatzName} Bademöglichkeiten vorhanden? (1/0) \nBademöglichkeiten vorhanden: \033[0m"
         )
         campingplatzBademöglichkeit = campingplatzBademöglichkeit.capitalize()
         campingplatzKiosk = input(
-            f"\n\033[1mIst bei {campingplatzName} ein Kiosk vorhanden? (True/False) \nKiosk vorhanden: \033[0m"
+            f"\n\033[1mIst bei {campingplatzName} ein Kiosk vorhanden? (1/0) \nKiosk vorhanden: \033[0m"
         )
         campingplatzKiosk = campingplatzKiosk.capitalize()
         campingplatzWLAN = input(
-            f"\n\033[1mIst bei {campingplatzName} WLAN verfügbar? (True/False) \nWLAN verfügbar: \033[0m"
+            f"\n\033[1mIst bei {campingplatzName} WLAN verfügbar? (1/0) \nWLAN verfügbar: \033[0m"
         )
         campingplatzWLAN = campingplatzWLAN.capitalize()
         campingplatzStrom = input(
-            f"\n\033[1mIst bei {campingplatzName} Strom verfügbar? (True/False) \nStrom verfügbar: \033[0m"
+            f"\n\033[1mIst bei {campingplatzName} Strom verfügbar? (1/0) \nStrom verfügbar: \033[0m"
         )
         campingplatzStrom = campingplatzStrom.capitalize()
         campingplatzWaschmaschine = input(
-            f"\n\033[1mSind bei {campingplatzName} Waschmaschinen vorhanden? (True/False) \nWaschmaschinen vorhanden: \033[0m"
+            f"\n\033[1mSind bei {campingplatzName} Waschmaschinen vorhanden? (1/0) \nWaschmaschinen vorhanden: \033[0m"
         )
         campingplatzWaschmaschine = campingplatzWaschmaschine.capitalize()
         campingplatzBildLink = input(
