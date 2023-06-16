@@ -37,7 +37,6 @@ Mit dem Entschluss war die grobe Planung abgeschlossen und die Umsetzung konnte 
 
 UML-Modell der Projektstruktur:
 
-<!--FIXME: Db wird kopiert in, würde ich ändern zu wird exportiert zu. und btw, commonly schriebt man die extensions klein also "data.json"-->
 <p align="center"><img src="./docs/UML.png" alt="UML" width="90%"></p>
 <p><br><br></p>
 
@@ -62,7 +61,6 @@ Welche Option sich hinter welcher Zahl verbirgt wird nach jedem Durchlauf, aufge
 Da es sich bei den Optionen um sich wiederholende Abläufe handelt, wurden sie in Form von Funktionen in das Programm implementiert.  
 Mögliche, folgende Parameter hingegen sind variabel und werden der Funktion daher bei der Ausführung bereitgestellt und berücksichtigt.
 
-<!--FIXME: maybe als code block mit ```[code]```, ist einfach zu ändern/visualisieren-->
 <p><br></p>
 <p align="center"><img src="./docs/EingabeOptionen.png" alt="Eingabeoptionen" width="50%"></p>
 <p><br><br><br><br></p>
@@ -110,14 +108,12 @@ Diese Datei wurde so implementiert, dass sie, jedes Mal wenn wir Daten in die Da
 Die Funktion welche die Daten aus der Datenbank in data.json schreibt sieht dabei folgendermaßen aus:
 
 <p><br></p>
-<!-- FIXME: actually code listings aber auf jeden fall als code block -->
 <p align="center"><img src="./docs/writeToDatabase.png" alt="Zwischenspeicherfunktion" width="60%"></p>
 
 <p><br><br></p>
 
 Als Ergebnis erhalten wir folgendes Datenformat mit welchem wir in Vue weiter arbeiten können:
 
-<!-- FIXME: genauso hier-->
 <p align="center"><img src="./docs/JSON.png" alt="JSON-Datei" width="80%"></p>
 
 <p>
