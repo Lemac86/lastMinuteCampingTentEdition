@@ -4,8 +4,9 @@ import json
 #Erstellt die Datenbank "lastMinuteCampingTentEdition" sofern sie noch nicht existiert
 def createDatenbank():
     mydb = MySQLConnection(
-        host="localhost",
+        host="db",
         user="root",
+        password="mariadb"
     )
 
     mycursor = mydb.cursor()
@@ -18,7 +19,7 @@ createDatenbank()
 
 #Stellt eine globale Verbindung zu unserer Datenbank her
 mydb = MySQLConnection(
-    host="localhost", user="root", database="lastMinuteCampingTentEdition"
+    host="db", user="root", database="lastMinuteCampingTentEdition", password="mariadb"
 )
 mycursor = mydb.cursor()
 
