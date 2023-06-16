@@ -37,6 +37,7 @@ Mit dem Entschluss war die grobe Planung abgeschlossen und die Umsetzung konnte 
 
 UML-Modell der Projektstruktur:
 
+<!--FIXME: Db wird kopiert in, würde ich ändern zu wird exportiert zu. und btw, commonly schriebt man die extensions klein also "data.json"-->
 <p align="center"><img src="./docs/UML.png" alt="UML" width="90%"></p>
 <p><br><br></p>
 
