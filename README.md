@@ -62,6 +62,7 @@ Welche Option sich hinter welcher Zahl verbirgt wird nach jedem Durchlauf, aufge
 Da es sich bei den Optionen um sich wiederholende Abläufe handelt, wurden sie in Form von Funktionen in das Programm implementiert.  
 Mögliche, folgende Parameter hingegen sind variabel und werden der Funktion daher bei der Ausführung bereitgestellt und berücksichtigt.
 
+<!--FIXME: maybe als code block mit ```[code]```, ist einfach zu ändern/visualisieren-->
 <p><br></p>
 <p align="center"><img src="./docs/EingabeOptionen.png" alt="Eingabeoptionen" width="50%"></p>
 <p><br><br><br><br></p>
